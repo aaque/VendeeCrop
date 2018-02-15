@@ -1,0 +1,21 @@
+﻿.login-body{
+    padding-top:0px;
+    padding-bottom:0px;
+    overflow:hidden;
+}
+
+.login-buyer {
+    height: 1000px;
+    text-align: center;
+    background-image: url('../Images/vege1.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+.login-farmer {
+    height:1000px;
+    text-align: center;
+    background-image: url('../Images/crop1.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+}

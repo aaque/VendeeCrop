@@ -8,6 +8,11 @@ namespace VendeeCrop.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult LoginIndex()
+        {
+            return View();
+        }
+
         public ActionResult Index()
         {
             return View();
