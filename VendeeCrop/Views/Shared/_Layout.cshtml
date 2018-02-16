@@ -17,19 +17,29 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Vendee Crop", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @if (Session["BuyerModel"] != null || Session["FarmerModel"] != null)
+                {
+                    @Html.ActionLink("Vendee Crop", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else
+                {
+                    @Html.ActionLink("Vendee Crop", "LoginIndex", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                @if (Session["BuyerModel"] != null || Session["FarmerModel"] != null)
+                {
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    @*<li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Buyers", "Index", "BuyerModels")</li>
-                        <li>@Html.ActionLink("Farmers", "Index", "FarmerModels")</li>
-                    }
-                    
+                }
+                @*<li>@Html.ActionLink("About", "About", "Home")</li>
+    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                @if (Request.IsAuthenticated)
+                {
+                <li>@Html.ActionLink("Buyers", "Index", "BuyerModels")</li>
+                <li>@Html.ActionLink("Farmers", "Index", "FarmerModels")</li>
+                }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -16,7 +16,19 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        @if (Session["BuyerModel"] != null || Session["FarmerModel"] != null)
+        {
+            if (Session["BuyerModel"] != null)
+            {
+                <li>@Html.ActionLink("Logout", "Logout", "BuyerModels", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
+            }
+            else if (Session["FarmerModel"] != null)
+            {
+                <li>@Html.ActionLink("Logout", "Logout", "FarmerModels", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
+            }
+        }
+
+    @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
     </ul>
 }

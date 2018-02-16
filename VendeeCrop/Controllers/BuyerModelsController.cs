@@ -14,6 +14,43 @@ namespace VendeeCrop.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult Login()
+        {
+            if (Session["BuyerModel"] != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+        public ActionResult Logout()
+        {
+            Session["BuyerModel"] = null;
+            Session["ErrorLogin"] = "";
+            return RedirectToAction("Login");
+        }
+
+        [HttpPost]
+        public ActionResult LoginNow(string txtPhoneNumber, string txtPassword)
+        {
+            string errorMessage = "";
+            BuyerModel buyer = db.BuyerModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword).SingleOrDefault();
+            if (buyer != null)
+            {
+                Session["ErrorLogin"] = "";
+                Session["BuyerModel"] = buyer;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                errorMessage = "Invalid credentials";
+
+            }
+            Session["BuyerModel"] = null;
+            Session["ErrorLogin"] = errorMessage;
+            return RedirectToAction("Login");
+        }
+
         // GET: BuyerModels
         public ActionResult Index()
         {

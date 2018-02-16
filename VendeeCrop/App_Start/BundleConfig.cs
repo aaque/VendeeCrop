@@ -25,6 +25,8 @@ namespace VendeeCrop
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/vendee-mobile.css",
+                      "~/Content/vendee.css",
                       "~/Content/site.css"));
         }
     }

@@ -1,21 +1,91 @@
-﻿.login-body{
-    padding-top:0px;
-    padding-bottom:0px;
-    overflow:hidden;
+﻿body {
+    /*font-family: 'Permanent Marker', cursive;*/
+    font-family: 'Raleway', sans-serif;
+}
+
+.site-title{
+    font-size:3em;
+    margin-bottom:30px;
+}
+
+.center-inside {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-body {
+    
+    padding-top: 0px;
+    padding-bottom: 0px;
+    overflow: hidden;
 }
 
 .login-buyer {
-    height: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
     text-align: center;
     background-image: url('../Images/vege1.jpg');
-    background-repeat:no-repeat;
-    background-size:cover;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+    .login-buyer:hover, .login-farmer:hover {
+        opacity:.9;
+        -webkit-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+    }
+
+.login-farmer span,.login-buyer span{
+    font-size:5em;
+    color:dodgerblue;
 }
 
 .login-farmer {
-    height:1000px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
     text-align: center;
-    background-image: url('../Images/crop1.jpg');
-    background-repeat:no-repeat;
-    background-size:cover;
+    background-image: url('../Images/soybeanfield.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
+.body-buyer {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    /*background-image: url('../Images/meteorite-background-seamless-crystals.jpg');*/
+
+    background-color: #32ff7e;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-container {
+    border: 1px solid #3ae374;
+    background-color: #3ae374;
+    height:50vh;
+    border-radius: 10px 10px;
+}
+
+.login-controls input {
+    max-width: 400px;
+}
+
+#txtPhoneNumber, #txtPassword{
+    text-align:center;
+}
+
