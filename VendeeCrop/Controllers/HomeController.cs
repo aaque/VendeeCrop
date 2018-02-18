@@ -10,12 +10,18 @@ namespace VendeeCrop.Controllers
     {
         public ActionResult LoginIndex()
         {
+            Session["ErrorLogin"] = "";
             return View();
         }
 
         public ActionResult Index()
         {
-            return View();
+            if (Session["BuyerModel"] == null && Session["FarmerModel"] == null)
+            {
+                return RedirectToAction("LoginIndex");
+            }
+
+                return View();
         }
 
         public ActionResult About()

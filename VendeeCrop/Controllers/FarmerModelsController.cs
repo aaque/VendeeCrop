@@ -14,11 +14,7 @@ namespace VendeeCrop.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Home()
-        {
-            return View();
-        }
-
+        
         public ActionResult Login()
         {
             if (Session["FarmerModel"] != null)
@@ -94,10 +90,12 @@ namespace VendeeCrop.Controllers
             {
                 db.FarmerModels.Add(farmerModel);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
             }
 
-            return View(farmerModel);
+            Session["FarmerModel"] = farmerModel;
+            return RedirectToAction("Login");
+            //return View(farmerModel);
         }
 
         // GET: FarmerModels/Edit/5
@@ -126,7 +124,8 @@ namespace VendeeCrop.Controllers
             {
                 db.Entry(farmerModel).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             return View(farmerModel);
         }

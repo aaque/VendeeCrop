@@ -89,10 +89,11 @@ namespace VendeeCrop.Controllers
             {
                 db.BuyerModels.Add(buyerModel);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
             }
-
-            return View(buyerModel);
+            Session["BuyerModel"] = buyerModel;
+            return RedirectToAction("Login");
+            //return View(buyerModel);
         }
 
         // GET: BuyerModels/Edit/5
@@ -121,7 +122,8 @@ namespace VendeeCrop.Controllers
             {
                 db.Entry(buyerModel).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             return View(buyerModel);
         }
