@@ -279,3 +279,6 @@ D:\Biloy\Documents\VendeeCrop\VendeeCrop\obj\Debug\VendeeCrop.csprojResolveAssem
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\obj\Debug\VendeeCrop.csproj.CoreCompileInputs.cache
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\obj\Debug\VendeeCrop.dll
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\obj\Debug\VendeeCrop.pdb
+F:\Documents\Visual Studio 2015\Projects\VendeeCropGit\VendeeCrop\obj\Debug\VendeeCrop.Migrations.InitialCreate.resources
+F:\Documents\Visual Studio 2015\Projects\VendeeCropGit\VendeeCrop\obj\Debug\VendeeCrop.csproj.GenerateResource.Cache
+F:\Documents\Visual Studio 2015\Projects\VendeeCropGit\VendeeCrop\obj\Debug\VendeeCrop.Migrations._021918_0135AM_VendeeCrop.resources

@@ -8,6 +8,11 @@ namespace VendeeCrop.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult Admin()
+        {
+            return RedirectToAction("Login","Account");
+        }
+
         public ActionResult LoginIndex()
         {
             Session["ErrorLogin"] = "";
@@ -16,7 +21,7 @@ namespace VendeeCrop.Controllers
 
         public ActionResult Index()
         {
-            if (Session["BuyerModel"] == null && Session["FarmerModel"] == null)
+            if (Session["BuyerModel"] == null && Session["FarmerModel"] == null && !Request.IsAuthenticated)
             {
                 return RedirectToAction("LoginIndex");
             }

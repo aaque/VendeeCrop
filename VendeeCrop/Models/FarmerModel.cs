@@ -26,6 +26,9 @@ namespace VendeeCrop.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        public string FullName { get { return FirstName + ' ' + LastName; } }
+
+
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }

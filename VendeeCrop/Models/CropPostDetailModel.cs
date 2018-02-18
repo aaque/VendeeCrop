@@ -7,19 +7,23 @@ using System.Web;
 
 namespace VendeeCrop.Models
 {
-    public class CropModel
+    public class CropPostDetailModel
     {
         [Key]
-        public int Id { get; set; }
+        public int CropPostDetailId { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string Name { get; set; }
+        [Display(Name = "Crop Post")]
+        public int CropPostId { get; set; }
+
+        [ForeignKey("CropPostId")]
+        public virtual CropPostModel CropPost { get; set; }
 
         [Display(Name = "Crop Type")]
         public int CropTypeId { get; set; }
 
         [ForeignKey("CropTypeId")]
         public virtual CropTypeModel CropType { get; set; }
+
+
     }
 }

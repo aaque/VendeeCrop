@@ -192,15 +192,29 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BuyerModelsController.cs" />
+    <Compile Include="Controllers\CropModelsController.cs" />
+    <Compile Include="Controllers\CropTypeModelsController.cs" />
     <Compile Include="Controllers\FarmerModelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802131248289_InitialCreate.cs" />
+    <Compile Include="Migrations\201802131248289_InitialCreate.Designer.cs">
+      <DependentUpon>201802131248289_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802181736088_021918_0135AM_VendeeCrop.cs" />
+    <Compile Include="Migrations\201802181736088_021918_0135AM_VendeeCrop.Designer.cs">
+      <DependentUpon>201802181736088_021918_0135AM_VendeeCrop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BuyerModel.cs" />
     <Compile Include="Models\CropModel.cs" />
+    <Compile Include="Models\CropPostModel.cs" />
+    <Compile Include="Models\CropPostDetailModel.cs" />
+    <Compile Include="Models\CropTypeModel.cs" />
     <Compile Include="Models\FarmerModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -285,6 +299,16 @@
     <Content Include="Views\Shared\_headpartial.cshtml" />
     <Content Include="Views\BuyerModels\Login.cshtml" />
     <Content Include="Views\FarmerModels\Login.cshtml" />
+    <Content Include="Views\CropTypeModels\Create.cshtml" />
+    <Content Include="Views\CropTypeModels\Delete.cshtml" />
+    <Content Include="Views\CropTypeModels\Details.cshtml" />
+    <Content Include="Views\CropTypeModels\Edit.cshtml" />
+    <Content Include="Views\CropTypeModels\Index.cshtml" />
+    <Content Include="Views\CropModels\Create.cshtml" />
+    <Content Include="Views\CropModels\Delete.cshtml" />
+    <Content Include="Views\CropModels\Details.cshtml" />
+    <Content Include="Views\CropModels\Edit.cshtml" />
+    <Content Include="Views\CropModels\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -301,6 +325,14 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201802131248289_InitialCreate.resx">
+      <DependentUpon>201802131248289_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802181736088_021918_0135AM_VendeeCrop.resx">
+      <DependentUpon>201802181736088_021918_0135AM_VendeeCrop.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
