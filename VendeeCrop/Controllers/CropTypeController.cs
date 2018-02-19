@@ -10,112 +10,107 @@ using VendeeCrop.Models;
 
 namespace VendeeCrop.Controllers
 {
-    public class CropModelsController : Controller
+    public class CropTypeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: CropModels
+        // GET: CropType
         public ActionResult Index()
         {
-            var cropModels = db.CropModels.Include(c => c.CropType);
-            return View(cropModels.ToList());
+            return View(db.CropTypeModels.ToList());
         }
 
-        // GET: CropModels/Details/5
+        // GET: CropType/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CropModel cropModel = db.CropModels.Find(id);
-            if (cropModel == null)
+            CropTypeModel cropTypeModel = db.CropTypeModels.Find(id);
+            if (cropTypeModel == null)
             {
                 return HttpNotFound();
             }
-            return View(cropModel);
+            return View(cropTypeModel);
         }
 
-        // GET: CropModels/Create
+        // GET: CropType/Create
         public ActionResult Create()
         {
-            ViewBag.CropTypeId = new SelectList(db.CropTypeModels, "CropTypeId", "Type");
             return View();
         }
 
-        // POST: CropModels/Create
+        // POST: CropType/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,CropTypeId")] CropModel cropModel)
+        public ActionResult Create([Bind(Include = "CropTypeId,Type")] CropTypeModel cropTypeModel)
         {
             if (ModelState.IsValid)
             {
-                db.CropModels.Add(cropModel);
+                db.CropTypeModels.Add(cropTypeModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CropTypeId = new SelectList(db.CropTypeModels, "CropTypeId", "Type", cropModel.CropTypeId);
-            return View(cropModel);
+            return View(cropTypeModel);
         }
 
-        // GET: CropModels/Edit/5
+        // GET: CropType/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CropModel cropModel = db.CropModels.Find(id);
-            if (cropModel == null)
+            CropTypeModel cropTypeModel = db.CropTypeModels.Find(id);
+            if (cropTypeModel == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CropTypeId = new SelectList(db.CropTypeModels, "CropTypeId", "Type", cropModel.CropTypeId);
-            return View(cropModel);
+            return View(cropTypeModel);
         }
 
-        // POST: CropModels/Edit/5
+        // POST: CropType/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,CropTypeId")] CropModel cropModel)
+        public ActionResult Edit([Bind(Include = "CropTypeId,Type")] CropTypeModel cropTypeModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cropModel).State = EntityState.Modified;
+                db.Entry(cropTypeModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CropTypeId = new SelectList(db.CropTypeModels, "CropTypeId", "Type", cropModel.CropTypeId);
-            return View(cropModel);
+            return View(cropTypeModel);
         }
 
-        // GET: CropModels/Delete/5
+        // GET: CropType/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CropModel cropModel = db.CropModels.Find(id);
-            if (cropModel == null)
+            CropTypeModel cropTypeModel = db.CropTypeModels.Find(id);
+            if (cropTypeModel == null)
             {
                 return HttpNotFound();
             }
-            return View(cropModel);
+            return View(cropTypeModel);
         }
 
-        // POST: CropModels/Delete/5
+        // POST: CropType/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CropModel cropModel = db.CropModels.Find(id);
-            db.CropModels.Remove(cropModel);
+            CropTypeModel cropTypeModel = db.CropTypeModels.Find(id);
+            db.CropTypeModels.Remove(cropTypeModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

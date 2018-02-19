@@ -37,5 +37,9 @@ namespace VendeeCrop.Models
         public System.Data.Entity.DbSet<VendeeCrop.Models.CropTypeModel> CropTypeModels { get; set; }
 
         public System.Data.Entity.DbSet<VendeeCrop.Models.CropModel> CropModels { get; set; }
+
+        public System.Data.Entity.DbSet<VendeeCrop.Models.CropPostModel> CropPostModels { get; set; }
+
+        public System.Data.Entity.DbSet<VendeeCrop.Models.CropPostDetailModel> CropPostDetailModels { get; set; }
     }
 }

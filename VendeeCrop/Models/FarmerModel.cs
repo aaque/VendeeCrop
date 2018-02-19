@@ -46,6 +46,8 @@ namespace VendeeCrop.Models
         public bool IsActive { get; set; }
         public bool IsApproved { get; set; }
 
+        public virtual ICollection<CropPostModel> CropPosts { get; set; }
+
         public FarmerModel()
         {
             IsActive = false;

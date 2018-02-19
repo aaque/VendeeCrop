@@ -192,8 +192,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BuyerModelsController.cs" />
-    <Compile Include="Controllers\CropModelsController.cs" />
-    <Compile Include="Controllers\CropTypeModelsController.cs" />
+    <Compile Include="Controllers\CropController.cs" />
+    <Compile Include="Controllers\CropPostController.cs" />
+    <Compile Include="Controllers\CropPostDetailController.cs" />
+    <Compile Include="Controllers\CropTypeController.cs" />
     <Compile Include="Controllers\FarmerModelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -208,6 +210,18 @@
     <Compile Include="Migrations\201802181736088_021918_0135AM_VendeeCrop.Designer.cs">
       <DependentUpon>201802181736088_021918_0135AM_VendeeCrop.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802190655323_021918_0253PM_VendeeCrop.cs" />
+    <Compile Include="Migrations\201802190655323_021918_0253PM_VendeeCrop.Designer.cs">
+      <DependentUpon>201802190655323_021918_0253PM_VendeeCrop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802190818169_021918_0416PM_VendeeCrop.cs" />
+    <Compile Include="Migrations\201802190818169_021918_0416PM_VendeeCrop.Designer.cs">
+      <DependentUpon>201802190818169_021918_0416PM_VendeeCrop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802190824389_021918_0424PM_VendeeCrop.cs" />
+    <Compile Include="Migrations\201802190824389_021918_0424PM_VendeeCrop.Designer.cs">
+      <DependentUpon>201802190824389_021918_0424PM_VendeeCrop.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BuyerModel.cs" />
@@ -218,6 +232,7 @@
     <Compile Include="Models\FarmerModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PostImageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -299,16 +314,26 @@
     <Content Include="Views\Shared\_headpartial.cshtml" />
     <Content Include="Views\BuyerModels\Login.cshtml" />
     <Content Include="Views\FarmerModels\Login.cshtml" />
-    <Content Include="Views\CropTypeModels\Create.cshtml" />
-    <Content Include="Views\CropTypeModels\Delete.cshtml" />
-    <Content Include="Views\CropTypeModels\Details.cshtml" />
-    <Content Include="Views\CropTypeModels\Edit.cshtml" />
-    <Content Include="Views\CropTypeModels\Index.cshtml" />
-    <Content Include="Views\CropModels\Create.cshtml" />
-    <Content Include="Views\CropModels\Delete.cshtml" />
-    <Content Include="Views\CropModels\Details.cshtml" />
-    <Content Include="Views\CropModels\Edit.cshtml" />
-    <Content Include="Views\CropModels\Index.cshtml" />
+    <Content Include="Views\CropPost\Create.cshtml" />
+    <Content Include="Views\CropPost\Delete.cshtml" />
+    <Content Include="Views\CropPost\Details.cshtml" />
+    <Content Include="Views\CropPost\Edit.cshtml" />
+    <Content Include="Views\CropPost\Index.cshtml" />
+    <Content Include="Views\CropPostDetail\Create.cshtml" />
+    <Content Include="Views\CropPostDetail\Delete.cshtml" />
+    <Content Include="Views\CropPostDetail\Details.cshtml" />
+    <Content Include="Views\CropPostDetail\Edit.cshtml" />
+    <Content Include="Views\CropPostDetail\Index.cshtml" />
+    <Content Include="Views\CropType\Create.cshtml" />
+    <Content Include="Views\CropType\Delete.cshtml" />
+    <Content Include="Views\CropType\Details.cshtml" />
+    <Content Include="Views\CropType\Edit.cshtml" />
+    <Content Include="Views\CropType\Index.cshtml" />
+    <Content Include="Views\Crop\Create.cshtml" />
+    <Content Include="Views\Crop\Delete.cshtml" />
+    <Content Include="Views\Crop\Details.cshtml" />
+    <Content Include="Views\Crop\Edit.cshtml" />
+    <Content Include="Views\Crop\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -332,6 +357,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802181736088_021918_0135AM_VendeeCrop.resx">
       <DependentUpon>201802181736088_021918_0135AM_VendeeCrop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802190655323_021918_0253PM_VendeeCrop.resx">
+      <DependentUpon>201802190655323_021918_0253PM_VendeeCrop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802190818169_021918_0416PM_VendeeCrop.resx">
+      <DependentUpon>201802190818169_021918_0416PM_VendeeCrop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802190824389_021918_0424PM_VendeeCrop.resx">
+      <DependentUpon>201802190824389_021918_0424PM_VendeeCrop.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
