@@ -193,10 +193,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BuyerModelsController.cs" />
     <Compile Include="Controllers\CropController.cs" />
+    <Compile Include="Controllers\CropPostController.cs" />
+    <Compile Include="Controllers\CropPostDetailController.cs" />
     <Compile Include="Controllers\CropTypeController.cs" />
     <Compile Include="Controllers\FarmerModelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,6 +219,22 @@
     <Compile Include="Migrations\201802200728128_updatemore.Designer.cs">
       <DependentUpon>201802200728128_updatemore.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802201215105_3.cs" />
+    <Compile Include="Migrations\201802201215105_3.Designer.cs">
+      <DependentUpon>201802201215105_3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802201225563_4.cs" />
+    <Compile Include="Migrations\201802201225563_4.Designer.cs">
+      <DependentUpon>201802201225563_4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802201544422_5.cs" />
+    <Compile Include="Migrations\201802201544422_5.Designer.cs">
+      <DependentUpon>201802201544422_5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802201605114_6.cs" />
+    <Compile Include="Migrations\201802201605114_6.Designer.cs">
+      <DependentUpon>201802201605114_6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BuyerModel.cs" />
@@ -227,8 +246,8 @@
     <Compile Include="Models\FarmerModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PostDetailsViewModel.cs" />
     <Compile Include="Models\PostImageModel.cs" />
-    <Compile Include="Models\UserController.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -322,11 +341,21 @@
     <Content Include="Views\Crop\Details.cshtml" />
     <Content Include="Views\Crop\Edit.cshtml" />
     <Content Include="Views\Crop\Index.cshtml" />
-    <Content Include="Views\User\Create.cshtml" />
-    <Content Include="Views\User\Delete.cshtml" />
-    <Content Include="Views\User\Details.cshtml" />
-    <Content Include="Views\User\Edit.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\CropPost\Create.cshtml" />
+    <Content Include="Views\CropPost\Delete.cshtml" />
+    <Content Include="Views\CropPost\Details.cshtml" />
+    <Content Include="Views\CropPost\Edit.cshtml" />
+    <Content Include="Views\CropPost\Index.cshtml" />
+    <Content Include="Views\CropPostDetail\Create.cshtml" />
+    <Content Include="Views\CropPostDetail\Delete.cshtml" />
+    <Content Include="Views\CropPostDetail\Details.cshtml" />
+    <Content Include="Views\CropPostDetail\Edit.cshtml" />
+    <Content Include="Views\CropPostDetail\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -356,6 +385,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802200728128_updatemore.resx">
       <DependentUpon>201802200728128_updatemore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802201215105_3.resx">
+      <DependentUpon>201802201215105_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802201225563_4.resx">
+      <DependentUpon>201802201225563_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802201544422_5.resx">
+      <DependentUpon>201802201544422_5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802201605114_6.resx">
+      <DependentUpon>201802201605114_6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

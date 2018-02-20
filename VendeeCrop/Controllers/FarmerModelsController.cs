@@ -35,8 +35,8 @@ namespace VendeeCrop.Controllers
         public ActionResult LoginNow(string txtPhoneNumber, string txtPassword)
         {
             string errorMessage = "";
-            FarmerModel farmer = db.FarmerModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword).SingleOrDefault();
-            UserModel user = db.UserModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword).SingleOrDefault();
+            //FarmerModel farmer = db.FarmerModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword).SingleOrDefault();
+            UserModel user = db.UserModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword && b.Type == "Farmer").SingleOrDefault();
             if (user != null)
             {
                 Session["ErrorLogin"] = "";

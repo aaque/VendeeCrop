@@ -18,14 +18,14 @@ namespace VendeeCrop.Controllers
         {
             if (Session["UserModel"] != null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("LoginIndex", "Home");
             }
-            return View();
+            return RedirectToAction("LoginIndex", "Home");
         }
 
         public ActionResult Logout()
         {
-            Session["BuyerModel"] = null;
+            Session["UserModel"] = null;
             Session["ErrorLogin"] = "";
             return RedirectToAction("Login");
         }
@@ -35,7 +35,7 @@ namespace VendeeCrop.Controllers
         {
             string errorMessage = "";
             //BuyerModel buyer = db.BuyerModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword).SingleOrDefault();
-            UserModel user = db.UserModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword).SingleOrDefault();
+            UserModel user = db.UserModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword && b.Type == "Buyer").SingleOrDefault();
             if (user != null)
             {
                 Session["ErrorLogin"] = "";

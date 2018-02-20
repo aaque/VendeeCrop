@@ -20,7 +20,10 @@ namespace VendeeCrop.Models
         [Display(Name = "User")]
         public int UserModelId { get; set; }
 
-        [ForeignKey("UserModelId")]
+        //event or crop
+        public string Type { get; set; }
+
+        [ForeignKey(nameof(UserModelId))]
         [Display(Name = "User")]
         public virtual UserModel User { get; set; }
 

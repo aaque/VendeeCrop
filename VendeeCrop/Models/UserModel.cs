@@ -27,8 +27,8 @@ namespace VendeeCrop.Models
         public string LastName { get; set; }
 
         public string FullName { get { return FirstName + ' ' + LastName; } }
+        
 
-        [Required]
         [StringLength(50)]
         public string Type { get; set; }
 
@@ -40,8 +40,7 @@ namespace VendeeCrop.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
-
-        [Required]
+        
         [StringLength(255)]
         [Display(Name = "Store Name")]
         public string StoreName { get; set; }
@@ -54,6 +53,8 @@ namespace VendeeCrop.Models
 
         public bool IsActive { get; set; }
         public bool IsApproved { get; set; }
+
+        public ICollection<CropPostModel> CropPosts { get; set; }
 
         public UserModel()
         {
