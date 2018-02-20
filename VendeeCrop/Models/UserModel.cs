@@ -55,6 +55,8 @@ namespace VendeeCrop.Models
         public bool IsActive { get; set; }
         public bool IsApproved { get; set; }
 
+        public ICollection<CropPostModel> CropPosts { get; set; }
+
         public UserModel()
         {
             IsActive = false;

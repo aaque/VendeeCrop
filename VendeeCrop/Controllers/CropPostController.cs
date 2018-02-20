@@ -6,119 +6,122 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using VendeeCrop.Models;
 
-namespace VendeeCrop.Models
+namespace VendeeCrop.Controllers
 {
-    public class UserController : Controller
+    public class CropPostController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-
-        public ActionResult Logout()
-        {
-            Session["UserModel"] = null;
-            Session["ErrorLogin"] = "";
-            return RedirectToAction("LoginIndex","Home");
-        }
-
-
-        // GET: User
+        // GET: CropPost
         public ActionResult Index()
         {
-            return View(db.UserModels.ToList());
+            var cropPostModels = db.CropPostModels.Include(c => c.User);
+            return View(cropPostModels.ToList());
         }
 
-        // GET: User/Details/5
+        // GET: CropPost/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserModel userModel = db.UserModels.Find(id);
-            if (userModel == null)
+            CropPostModel cropPostModel = db.CropPostModels.Find(id);
+            if (cropPostModel == null)
             {
                 return HttpNotFound();
             }
-            return View(userModel);
+            return View(cropPostModel);
         }
 
-        // GET: User/Create
+        // GET: CropPost/Create
         public ActionResult Create()
         {
+            ViewBag.UserModelId = new SelectList(db.UserModels, "Id", "PhoneNumber");
             return View();
         }
 
-        // POST: User/Create
+        // POST: CropPost/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PhoneNumber,FirstName,LastName,Type,Password,ConfirmPassword,StoreName,Address,ImagePath,IsActive,IsApproved")] UserModel userModel)
+        public ActionResult Create([Bind(Include = "CropPostId,Title,Description,PostType,UserModelId")] CropPostModel cropPostModel)
         {
             if (ModelState.IsValid)
             {
-                db.UserModels.Add(userModel);
+                UserModel currentUser = (UserModel)Session["UserModel"];
+                if (currentUser.Type == "Farmer")
+                {
+                    cropPostModel.PostType = "Crop";
+                }
+                cropPostModel.UserModelId = currentUser.Id;
+                db.CropPostModels.Add(cropPostModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(userModel);
+            ViewBag.UserModelId = new SelectList(db.UserModels, "Id", "PhoneNumber", cropPostModel.UserModelId);
+            return View(cropPostModel);
         }
 
-        // GET: User/Edit/5
+        // GET: CropPost/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserModel userModel = db.UserModels.Find(id);
-            if (userModel == null)
+            CropPostModel cropPostModel = db.CropPostModels.Find(id);
+            if (cropPostModel == null)
             {
                 return HttpNotFound();
             }
-            return View(userModel);
+            ViewBag.UserModelId = new SelectList(db.UserModels, "Id", "PhoneNumber", cropPostModel.UserModelId);
+            return View(cropPostModel);
         }
 
-        // POST: User/Edit/5
+        // POST: CropPost/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PhoneNumber,FirstName,LastName,Type,Password,ConfirmPassword,StoreName,Address,ImagePath,IsActive,IsApproved")] UserModel userModel)
+        public ActionResult Edit([Bind(Include = "CropPostId,Title,Description,PostType,UserModelId")] CropPostModel cropPostModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(userModel).State = EntityState.Modified;
+                db.Entry(cropPostModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(userModel);
+            ViewBag.UserModelId = new SelectList(db.UserModels, "Id", "PhoneNumber", cropPostModel.UserModelId);
+            return View(cropPostModel);
         }
 
-        // GET: User/Delete/5
+        // GET: CropPost/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserModel userModel = db.UserModels.Find(id);
-            if (userModel == null)
+            CropPostModel cropPostModel = db.CropPostModels.Find(id);
+            if (cropPostModel == null)
             {
                 return HttpNotFound();
             }
-            return View(userModel);
+            return View(cropPostModel);
         }
 
-        // POST: User/Delete/5
+        // POST: CropPost/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            UserModel userModel = db.UserModels.Find(id);
-            db.UserModels.Remove(userModel);
+            CropPostModel cropPostModel = db.CropPostModels.Find(id);
+            db.CropPostModels.Remove(cropPostModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

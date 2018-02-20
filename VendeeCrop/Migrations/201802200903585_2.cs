@@ -7,14 +7,12 @@ namespace VendeeCrop.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.BuyerModels", "ImagePath", c => c.String());
-            AddColumn("dbo.FarmerModels", "ImagePath", c => c.String());
+            AlterColumn("dbo.CropPostModels", "PostType", c => c.String());
         }
         
         public override void Down()
         {
-            DropColumn("dbo.FarmerModels", "ImagePath");
-            DropColumn("dbo.BuyerModels", "ImagePath");
+            AlterColumn("dbo.CropPostModels", "PostType", c => c.String(nullable: false));
         }
     }
 }

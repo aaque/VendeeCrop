@@ -29,6 +29,9 @@ namespace VendeeCrop.Models
         [ForeignKey("CropId")]
         public virtual CropModel Crop { get; set; }
 
+        [DataType(DataType.Currency)]
+        public decimal Price { get; set; }
+
         public string Status { get; set; }
 
         [DataType(DataType.DateTime)]

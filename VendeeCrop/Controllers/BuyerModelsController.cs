@@ -35,7 +35,7 @@ namespace VendeeCrop.Controllers
         {
             string errorMessage = "";
             //BuyerModel buyer = db.BuyerModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword).SingleOrDefault();
-            UserModel user = db.UserModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword).SingleOrDefault();
+            UserModel user = db.UserModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword && b.Type == "Buyer").SingleOrDefault();
             if (user != null)
             {
                 Session["ErrorLogin"] = "";

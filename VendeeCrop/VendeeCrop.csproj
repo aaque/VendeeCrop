@@ -193,6 +193,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BuyerModelsController.cs" />
     <Compile Include="Controllers\CropController.cs" />
+    <Compile Include="Controllers\CropPostController.cs" />
+    <Compile Include="Controllers\CropPostDetailController.cs" />
     <Compile Include="Controllers\CropTypeController.cs" />
     <Compile Include="Controllers\FarmerModelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -200,21 +202,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802131248289_InitialCreate.cs" />
-    <Compile Include="Migrations\201802131248289_InitialCreate.Designer.cs">
-      <DependentUpon>201802131248289_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201802200830582_1.cs" />
+    <Compile Include="Migrations\201802200830582_1.Designer.cs">
+      <DependentUpon>201802200830582_1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802200204123_1.cs" />
-    <Compile Include="Migrations\201802200204123_1.Designer.cs">
-      <DependentUpon>201802200204123_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802200500267_2.cs" />
-    <Compile Include="Migrations\201802200500267_2.Designer.cs">
-      <DependentUpon>201802200500267_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802200728128_updatemore.cs" />
-    <Compile Include="Migrations\201802200728128_updatemore.Designer.cs">
-      <DependentUpon>201802200728128_updatemore.cs</DependentUpon>
+    <Compile Include="Migrations\201802200903585_2.cs" />
+    <Compile Include="Migrations\201802200903585_2.Designer.cs">
+      <DependentUpon>201802200903585_2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -222,7 +216,6 @@
     <Compile Include="Models\CropModel.cs" />
     <Compile Include="Models\CropPostModel.cs" />
     <Compile Include="Models\CropPostDetailModel.cs" />
-    <Compile Include="Models\CropPriceModel.cs" />
     <Compile Include="Models\CropTypeModel.cs" />
     <Compile Include="Models\FarmerModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -327,6 +320,16 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\CropPost\Create.cshtml" />
+    <Content Include="Views\CropPost\Delete.cshtml" />
+    <Content Include="Views\CropPost\Details.cshtml" />
+    <Content Include="Views\CropPost\Edit.cshtml" />
+    <Content Include="Views\CropPost\Index.cshtml" />
+    <Content Include="Views\CropPostDetail\Create.cshtml" />
+    <Content Include="Views\CropPostDetail\Delete.cshtml" />
+    <Content Include="Views\CropPostDetail\Details.cshtml" />
+    <Content Include="Views\CropPostDetail\Edit.cshtml" />
+    <Content Include="Views\CropPostDetail\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -345,17 +348,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802131248289_InitialCreate.resx">
-      <DependentUpon>201802131248289_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802200830582_1.resx">
+      <DependentUpon>201802200830582_1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802200204123_1.resx">
-      <DependentUpon>201802200204123_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802200500267_2.resx">
-      <DependentUpon>201802200500267_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802200728128_updatemore.resx">
-      <DependentUpon>201802200728128_updatemore.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802200903585_2.resx">
+      <DependentUpon>201802200903585_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

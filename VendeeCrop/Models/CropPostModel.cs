@@ -17,10 +17,13 @@ namespace VendeeCrop.Models
 
         public string Description { get; set; }
 
+         //event or crop Post
+        public string PostType { get; set; }
+
         [Display(Name = "User")]
         public int UserModelId { get; set; }
 
-        [ForeignKey("UserModelId")]
+        [ForeignKey(nameof(UserModelId))]
         [Display(Name = "User")]
         public virtual UserModel User { get; set; }
 
