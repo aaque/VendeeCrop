@@ -6,7 +6,7 @@ using System.Web;
 
 namespace VendeeCrop.Models
 {
-    public class FarmerModel
+    public class UserModel
     {
         [Key]
         public int Id { get; set; }
@@ -28,6 +28,9 @@ namespace VendeeCrop.Models
 
         public string FullName { get { return FirstName + ' ' + LastName; } }
 
+        [Required]
+        [StringLength(50)]
+        public string Type { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -40,6 +43,11 @@ namespace VendeeCrop.Models
 
         [Required]
         [StringLength(255)]
+        [Display(Name = "Store Name")]
+        public string StoreName { get; set; }
+
+        [Required]
+        [StringLength(255)]
         public string Address { get; set; }
 
         public string ImagePath { get; set; }
@@ -47,13 +55,10 @@ namespace VendeeCrop.Models
         public bool IsActive { get; set; }
         public bool IsApproved { get; set; }
 
-        public virtual ICollection<CropPostModel> CropPosts { get; set; }
-
-        public FarmerModel()
+        public UserModel()
         {
             IsActive = false;
             IsApproved = false;
         }
-
     }
 }

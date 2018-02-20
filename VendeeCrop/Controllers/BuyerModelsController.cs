@@ -16,7 +16,7 @@ namespace VendeeCrop.Controllers
 
         public ActionResult Login()
         {
-            if (Session["BuyerModel"] != null)
+            if (Session["UserModel"] != null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -34,11 +34,12 @@ namespace VendeeCrop.Controllers
         public ActionResult LoginNow(string txtPhoneNumber, string txtPassword)
         {
             string errorMessage = "";
-            BuyerModel buyer = db.BuyerModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword).SingleOrDefault();
-            if (buyer != null)
+            //BuyerModel buyer = db.BuyerModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword).SingleOrDefault();
+            UserModel user = db.UserModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword).SingleOrDefault();
+            if (user != null)
             {
                 Session["ErrorLogin"] = "";
-                Session["BuyerModel"] = buyer;
+                Session["UserModel"] = user;
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -46,7 +47,7 @@ namespace VendeeCrop.Controllers
                 errorMessage = "Invalid credentials";
 
             }
-            Session["BuyerModel"] = null;
+            Session["UserModel"] = null;
             Session["ErrorLogin"] = errorMessage;
             return RedirectToAction("Login");
         }
@@ -83,15 +84,36 @@ namespace VendeeCrop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PhoneNumber,FirstName,LastName,Password,ConfirmPassword,StoreName,BusinessAddress,IsActive,IsApproved")] BuyerModel buyerModel)
+        public ActionResult Create([Bind(Include = "Id,PhoneNumber,ImagePath,FirstName,LastName,Password,ConfirmPassword,StoreName,BusinessAddress,IsActive,IsApproved")] BuyerModel buyerModel, HttpPostedFileBase file)
         {
+            UserModel user = new UserModel();
             if (ModelState.IsValid)
             {
-                db.BuyerModels.Add(buyerModel);
+                if (file != null)
+                {
+                    string filename = Guid.NewGuid().ToString("N") + file.FileName;
+                    file.SaveAs(HttpContext.Server.MapPath("~/Images/")
+                                                          + filename);
+                    buyerModel.ImagePath = filename;
+                }
+                
+
+                user.PhoneNumber = buyerModel.PhoneNumber;
+                user.FirstName = buyerModel.FirstName;
+                user.LastName = buyerModel.LastName;
+                user.Type = "Buyer";
+                user.Password = buyerModel.Password;
+                user.ConfirmPassword = buyerModel.ConfirmPassword;
+                user.StoreName = buyerModel.StoreName;
+                user.Address = buyerModel.BusinessAddress;
+                user.ImagePath = buyerModel.ImagePath;
+
+                //db.BuyerModels.Add(buyerModel);
+                db.UserModels.Add(user);
                 db.SaveChanges();
                 //return RedirectToAction("Index");
             }
-            Session["BuyerModel"] = buyerModel;
+            Session["UserModel"] = user;
             return RedirectToAction("Login");
             //return View(buyerModel);
         }
@@ -116,10 +138,17 @@ namespace VendeeCrop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PhoneNumber,FirstName,LastName,Password,ConfirmPassword,StoreName,BusinessAddress,IsActive,IsApproved")] BuyerModel buyerModel)
+        public ActionResult Edit([Bind(Include = "Id,PhoneNumber,ImagePath,FirstName,LastName,Password,ConfirmPassword,StoreName,BusinessAddress,IsActive,IsApproved")] BuyerModel buyerModel, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    string filename = Guid.NewGuid().ToString("N") + file.FileName;
+                    file.SaveAs(HttpContext.Server.MapPath("~/Images/")
+                                                          + filename);
+                    buyerModel.ImagePath = filename;
+                }
                 db.Entry(buyerModel).State = EntityState.Modified;
                 db.SaveChanges();
                 //return RedirectToAction("Index");

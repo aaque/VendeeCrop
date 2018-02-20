@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using VendeeCrop.Models;
+
 
 namespace VendeeCrop.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Admin()
         {
             return RedirectToAction("Login","Account");
@@ -25,8 +31,8 @@ namespace VendeeCrop.Controllers
             {
                 return RedirectToAction("LoginIndex");
             }
-
-                return View();
+            var cropPostModels = db.CropPostModels.Include(c => c.User);
+            return View(cropPostModels.ToList());
         }
 
         public ActionResult About()

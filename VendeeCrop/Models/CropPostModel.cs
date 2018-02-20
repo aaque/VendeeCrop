@@ -17,12 +17,12 @@ namespace VendeeCrop.Models
 
         public string Description { get; set; }
 
-        [Display(Name = "Farmer")]
-        public int FarmerModelId { get; set; }
+        [Display(Name = "User")]
+        public int UserModelId { get; set; }
 
-        [ForeignKey("FarmerModelId")]
-        [Display(Name = "Farmer")]
-        public virtual FarmerModel Farmer { get; set; }
+        [ForeignKey("UserModelId")]
+        [Display(Name = "User")]
+        public virtual UserModel User { get; set; }
 
         public virtual ICollection<CropPostDetailModel> CropPostDetails { get; set; }
 

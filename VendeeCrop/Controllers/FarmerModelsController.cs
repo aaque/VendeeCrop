@@ -17,7 +17,7 @@ namespace VendeeCrop.Controllers
         
         public ActionResult Login()
         {
-            if (Session["FarmerModel"] != null)
+            if (Session["UserModel"] != null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -26,7 +26,7 @@ namespace VendeeCrop.Controllers
 
         public ActionResult Logout()
         {
-            Session["FarmerModel"] = null;
+            Session["UserModel"] = null;
             Session["ErrorLogin"] = "";
             return RedirectToAction("Login");
         }
@@ -36,10 +36,11 @@ namespace VendeeCrop.Controllers
         {
             string errorMessage = "";
             FarmerModel farmer = db.FarmerModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword).SingleOrDefault();
-            if (farmer != null)
+            UserModel user = db.UserModels.Where(b => b.PhoneNumber == txtPhoneNumber && b.Password == txtPassword).SingleOrDefault();
+            if (user != null)
             {
                 Session["ErrorLogin"] = "";
-                Session["FarmerModel"] = farmer;
+                Session["UserModel"] = user;
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -47,7 +48,7 @@ namespace VendeeCrop.Controllers
                 errorMessage = "Invalid credentials";
 
             }
-            Session["FarmerModel"] = null;
+            Session["UserModel"] = null;
             Session["ErrorLogin"] = errorMessage;
             return RedirectToAction("Login");
         }
@@ -84,16 +85,35 @@ namespace VendeeCrop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PhoneNumber,FirstName,LastName,Password,ConfirmPassword,Address,IsActive,IsApproved")] FarmerModel farmerModel)
+        public ActionResult Create([Bind(Include = "Id,PhoneNumber,ImagePath,FirstName,LastName,Password,ConfirmPassword,Address,IsActive,IsApproved")] FarmerModel farmerModel, HttpPostedFileBase file)
         {
+            UserModel user = new UserModel();
             if (ModelState.IsValid)
             {
-                db.FarmerModels.Add(farmerModel);
+                if (file != null)
+                {
+                    string filename = Guid.NewGuid().ToString("N") + file.FileName;
+                    file.SaveAs(HttpContext.Server.MapPath("~/Images/")
+                                                          + filename);
+                    farmerModel.ImagePath = filename;
+                }
+
+                user.PhoneNumber = farmerModel.PhoneNumber;
+                user.FirstName = farmerModel.FirstName;
+                user.LastName = farmerModel.LastName;
+                user.Type = "Farmer";
+                user.Password = farmerModel.Password;
+                user.ConfirmPassword = farmerModel.ConfirmPassword;
+                user.StoreName = "";
+                user.Address = farmerModel.Address;
+                user.ImagePath = farmerModel.ImagePath;
+                db.UserModels.Add(user);
+                //db.FarmerModels.Add(farmerModel);
                 db.SaveChanges();
                 //return RedirectToAction("Index");
             }
 
-            Session["FarmerModel"] = farmerModel;
+            Session["UserModel"] = user;
             return RedirectToAction("Login");
             //return View(farmerModel);
         }
@@ -118,10 +138,17 @@ namespace VendeeCrop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PhoneNumber,FirstName,LastName,Password,ConfirmPassword,Address,IsActive,IsApproved")] FarmerModel farmerModel)
+        public ActionResult Edit([Bind(Include = "Id,PhoneNumber,FirstName,LastName,Password,ConfirmPassword,Address,IsActive,IsApproved")] FarmerModel farmerModel, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    string filename = Guid.NewGuid().ToString("N") + file.FileName;
+                    file.SaveAs(HttpContext.Server.MapPath("~/Images/")
+                                                          + filename);
+                    farmerModel.ImagePath = filename;
+                }
                 db.Entry(farmerModel).State = EntityState.Modified;
                 db.SaveChanges();
                 //return RedirectToAction("Index");

@@ -193,8 +193,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BuyerModelsController.cs" />
     <Compile Include="Controllers\CropController.cs" />
-    <Compile Include="Controllers\CropPostController.cs" />
-    <Compile Include="Controllers\CropPostDetailController.cs" />
     <Compile Include="Controllers\CropTypeController.cs" />
     <Compile Include="Controllers\FarmerModelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -206,21 +204,17 @@
     <Compile Include="Migrations\201802131248289_InitialCreate.Designer.cs">
       <DependentUpon>201802131248289_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802181736088_021918_0135AM_VendeeCrop.cs" />
-    <Compile Include="Migrations\201802181736088_021918_0135AM_VendeeCrop.Designer.cs">
-      <DependentUpon>201802181736088_021918_0135AM_VendeeCrop.cs</DependentUpon>
+    <Compile Include="Migrations\201802200204123_1.cs" />
+    <Compile Include="Migrations\201802200204123_1.Designer.cs">
+      <DependentUpon>201802200204123_1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802190655323_021918_0253PM_VendeeCrop.cs" />
-    <Compile Include="Migrations\201802190655323_021918_0253PM_VendeeCrop.Designer.cs">
-      <DependentUpon>201802190655323_021918_0253PM_VendeeCrop.cs</DependentUpon>
+    <Compile Include="Migrations\201802200500267_2.cs" />
+    <Compile Include="Migrations\201802200500267_2.Designer.cs">
+      <DependentUpon>201802200500267_2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802190818169_021918_0416PM_VendeeCrop.cs" />
-    <Compile Include="Migrations\201802190818169_021918_0416PM_VendeeCrop.Designer.cs">
-      <DependentUpon>201802190818169_021918_0416PM_VendeeCrop.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802190824389_021918_0424PM_VendeeCrop.cs" />
-    <Compile Include="Migrations\201802190824389_021918_0424PM_VendeeCrop.Designer.cs">
-      <DependentUpon>201802190824389_021918_0424PM_VendeeCrop.cs</DependentUpon>
+    <Compile Include="Migrations\201802200728128_updatemore.cs" />
+    <Compile Include="Migrations\201802200728128_updatemore.Designer.cs">
+      <DependentUpon>201802200728128_updatemore.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -228,11 +222,14 @@
     <Compile Include="Models\CropModel.cs" />
     <Compile Include="Models\CropPostModel.cs" />
     <Compile Include="Models\CropPostDetailModel.cs" />
+    <Compile Include="Models\CropPriceModel.cs" />
     <Compile Include="Models\CropTypeModel.cs" />
     <Compile Include="Models\FarmerModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PostImageModel.cs" />
+    <Compile Include="Models\UserController.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -254,6 +251,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Documentations\VendeeCrops.docx" />
     <None Include="Properties\PublishProfiles\iis.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -314,16 +312,6 @@
     <Content Include="Views\Shared\_headpartial.cshtml" />
     <Content Include="Views\BuyerModels\Login.cshtml" />
     <Content Include="Views\FarmerModels\Login.cshtml" />
-    <Content Include="Views\CropPost\Create.cshtml" />
-    <Content Include="Views\CropPost\Delete.cshtml" />
-    <Content Include="Views\CropPost\Details.cshtml" />
-    <Content Include="Views\CropPost\Edit.cshtml" />
-    <Content Include="Views\CropPost\Index.cshtml" />
-    <Content Include="Views\CropPostDetail\Create.cshtml" />
-    <Content Include="Views\CropPostDetail\Delete.cshtml" />
-    <Content Include="Views\CropPostDetail\Details.cshtml" />
-    <Content Include="Views\CropPostDetail\Edit.cshtml" />
-    <Content Include="Views\CropPostDetail\Index.cshtml" />
     <Content Include="Views\CropType\Create.cshtml" />
     <Content Include="Views\CropType\Delete.cshtml" />
     <Content Include="Views\CropType\Details.cshtml" />
@@ -334,6 +322,11 @@
     <Content Include="Views\Crop\Details.cshtml" />
     <Content Include="Views\Crop\Edit.cshtml" />
     <Content Include="Views\Crop\Index.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -355,17 +348,14 @@
     <EmbeddedResource Include="Migrations\201802131248289_InitialCreate.resx">
       <DependentUpon>201802131248289_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802181736088_021918_0135AM_VendeeCrop.resx">
-      <DependentUpon>201802181736088_021918_0135AM_VendeeCrop.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802200204123_1.resx">
+      <DependentUpon>201802200204123_1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802190655323_021918_0253PM_VendeeCrop.resx">
-      <DependentUpon>201802190655323_021918_0253PM_VendeeCrop.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802200500267_2.resx">
+      <DependentUpon>201802200500267_2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802190818169_021918_0416PM_VendeeCrop.resx">
-      <DependentUpon>201802190818169_021918_0416PM_VendeeCrop.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802190824389_021918_0424PM_VendeeCrop.resx">
-      <DependentUpon>201802190824389_021918_0424PM_VendeeCrop.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802200728128_updatemore.resx">
+      <DependentUpon>201802200728128_updatemore.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

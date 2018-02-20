@@ -7,13 +7,13 @@ namespace VendeeCrop.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class _021918_0416PM_VendeeCrop : IMigrationMetadata
+    public sealed partial class updatemore : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_021918_0416PM_VendeeCrop));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updatemore));
         
         string IMigrationMetadata.Id
         {
-            get { return "201802190818169_021918_0416PM_VendeeCrop"; }
+            get { return "201802200728128_updatemore"; }
         }
         
         string IMigrationMetadata.Source

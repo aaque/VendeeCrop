@@ -47,6 +47,7 @@ namespace VendeeCrop.Models
         [Display(Name = "Business Address")]
         public string BusinessAddress { get; set; }
 
+        public string ImagePath { get; set; }
 
         public bool IsActive { get; set; }
         public bool IsApproved { get; set; }
