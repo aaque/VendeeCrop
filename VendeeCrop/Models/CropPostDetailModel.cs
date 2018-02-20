@@ -26,8 +26,10 @@ namespace VendeeCrop.Models
         public int CropId { get; set; }
 
         [Display(Name = "Crop")]
-        [ForeignKey("CropId")]
+        [ForeignKey(nameof(CropId))]
         public virtual CropModel Crop { get; set; }
+
+        public decimal Price { get; set; }
 
         public string Status { get; set; }
 

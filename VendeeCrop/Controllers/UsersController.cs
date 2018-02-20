@@ -6,13 +6,22 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using VendeeCrop.Models;
 
-namespace VendeeCrop.Models
+namespace VendeeCrop.Controllers
 {
-    public class UserController : Controller
+    public class UsersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult Login()
+        {
+            if (Session["UserModel"] != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
 
         public ActionResult Logout()
         {
@@ -21,14 +30,13 @@ namespace VendeeCrop.Models
             return RedirectToAction("Login");
         }
 
-
-        // GET: User
+        // GET: Users
         public ActionResult Index()
         {
             return View(db.UserModels.ToList());
         }
 
-        // GET: User/Details/5
+        // GET: Users/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -43,15 +51,15 @@ namespace VendeeCrop.Models
             return View(userModel);
         }
 
-        // GET: User/Create
+        // GET: Users/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: User/Create
+        // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,PhoneNumber,FirstName,LastName,Type,Password,ConfirmPassword,StoreName,Address,ImagePath,IsActive,IsApproved")] UserModel userModel)
@@ -66,7 +74,7 @@ namespace VendeeCrop.Models
             return View(userModel);
         }
 
-        // GET: User/Edit/5
+        // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -81,9 +89,9 @@ namespace VendeeCrop.Models
             return View(userModel);
         }
 
-        // POST: User/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,PhoneNumber,FirstName,LastName,Type,Password,ConfirmPassword,StoreName,Address,ImagePath,IsActive,IsApproved")] UserModel userModel)
@@ -97,7 +105,7 @@ namespace VendeeCrop.Models
             return View(userModel);
         }
 
-        // GET: User/Delete/5
+        // GET: Users/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -112,7 +120,7 @@ namespace VendeeCrop.Models
             return View(userModel);
         }
 
-        // POST: User/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

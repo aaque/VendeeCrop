@@ -1,0 +1,62 @@
+﻿@model IEnumerable<VendeeCrop.Models.CropPostModel>
+
+@{
+    ViewBag.Title = "Index";
+    var IsAdmin = ((VendeeCrop.Models.UserModel)Session["UserModel"]).Type == "Admin" || Request.IsAuthenticated;
+}
+
+<h2>My Posts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        @if (IsAdmin)
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.User.FullName)
+            </th>
+        }
+
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @if (IsAdmin)
+            {
+                <td>
+                    <img src="~/Images/ @item.User.ImagePath" class="img img-thumbnail img-small" /> @Html.DisplayFor(modelItem => item.User.FullName)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>*@
+            <td>
+                @Html.ActionLink("Post Details", "Index", "CropPostDetail", routeValues: new { Id = item.CropPostId }, htmlAttributes: new { id = "logoutLink" }) |
+                @*@Html.ActionLink("Post Details", "Index","CropPostDetail", new { id = item.CropPostId }) |*@
+                @Html.ActionLink("Edit", "Edit", new { id = item.CropPostId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CropPostId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CropPostId })
+            </td>
+        </tr>
+    }
+
+</table>

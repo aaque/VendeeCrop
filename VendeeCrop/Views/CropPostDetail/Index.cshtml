@@ -1,0 +1,65 @@
+﻿@*@model IEnumerable<VendeeCrop.Models.CropPostDetailModel>*@
+@model VendeeCrop.Models.PostDetailsViewModel
+
+@{
+    ViewBag.Title = "Index";
+    var IsAdmin = ((VendeeCrop.Models.UserModel)Session["UserModel"]).Type == "Admin" || Request.IsAuthenticated;
+}
+
+<h2><img src="~/Images/@Model.CropPost.User.ImagePath" class="img img-thumbnail img-small" />@Model.CropPost.Title - @Model.CropPost.Description</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { id = Model.CropPostId })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Details
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Created
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in ((VendeeCrop.Models.PostDetailsViewModel)Model).CropPostDetails) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Crop.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CropPost.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Details)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CropPostDetailId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CropPostDetailId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CropPostDetailId })
+        </td>
+    </tr>
+}
+
+</table>

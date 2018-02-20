@@ -27,7 +27,7 @@ namespace VendeeCrop.Controllers
 
         public ActionResult Index()
         {
-            if (Session["BuyerModel"] == null && Session["FarmerModel"] == null && !Request.IsAuthenticated)
+            if (Session["UserModel"] == null && !Request.IsAuthenticated)
             {
                 return RedirectToAction("LoginIndex");
             }
