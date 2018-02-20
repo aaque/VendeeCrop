@@ -18,7 +18,7 @@ namespace VendeeCrop.Models
         {
             Session["UserModel"] = null;
             Session["ErrorLogin"] = "";
-            return RedirectToAction("LoginIndex","Home");
+            return RedirectToAction("Login");
         }
 
 

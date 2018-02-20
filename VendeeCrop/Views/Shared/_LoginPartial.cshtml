@@ -23,8 +23,8 @@ else
             //{
             var Name = ((VendeeCrop.Models.UserModel)Session["UserModel"]).FullName;
             var _Id = ((VendeeCrop.Models.UserModel)Session["UserModel"]).Id;
-                <li>@Html.ActionLink("Hello " + Name , "Edit", "User", routeValues: new { Id = _Id}, htmlAttributes: new { id = "logoutLink" })</li>
-                <li>@Html.ActionLink("Logout", "Logout", "User", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
+                <li>@Html.ActionLink("Hello " + Name , "Edit", "UserModels", routeValues: new { Id = _Id}, htmlAttributes: new { id = "logoutLink" })</li>
+                <li>@Html.ActionLink("Logout", "Logout", "UserModels", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
             //}
             @*else if (Session["FarmerModel"] != null)
             {

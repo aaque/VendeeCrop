@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @if (Session["UserModel"] != null || Request.IsAuthenticated)
+                @if (Session["BuyerModel"] != null || Session["FarmerModel"] != null || Request.IsAuthenticated)
                 {
                     @Html.ActionLink("Vendee Crop", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 }
@@ -28,7 +28,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                @if (Session["UserModel"] != null)
+                @if (Session["BuyerModel"] != null || Session["FarmerModel"] != null)
                 {
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 }
