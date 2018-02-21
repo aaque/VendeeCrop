@@ -23,7 +23,9 @@ namespace VendeeCrop.Controllers
             {
                 vm.CropPost = db.CropPostModels.First();
                 var cropPostDetailModels = db.CropPostDetailModels.Include(c => c.Crop).Include(c => c.CropPost);
+                //ICollection<PostImageModel> cropPostImages = new ICollection<PostImageModel>();
                 vm.CropPostDetails = (ICollection<CropPostDetailModel>)cropPostDetailModels.ToList();
+                //vm.PostImages = cropPostImages;
                 //return View(cropPostDetailModels.ToList());
                 return View(vm);
             }
@@ -31,6 +33,8 @@ namespace VendeeCrop.Controllers
             {
                 vm.CropPost = db.CropPostModels.Find(id);
                 var cropPostDetailModels = db.CropPostDetailModels.Where(c => c.CropPostId == id).Include(c => c.Crop).Include(c => c.CropPost);
+                ICollection<CropPostImageModel> cropPostImages = db.CropPostImageModels.Where(p => p.CropPostId == id).Include(c => c.CropPost).ToList();
+                vm.PostImages = cropPostImages;
                 vm.CropPostDetails = (ICollection<CropPostDetailModel>)cropPostDetailModels.ToList();
                 return View(vm);
             }

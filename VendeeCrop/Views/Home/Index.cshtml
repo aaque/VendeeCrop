@@ -4,20 +4,15 @@
     ViewBag.Title = "Home Page";
 }
 
-@*<div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>*@
 @foreach (var item in Model)
 {
 <div class="row">
     <div class="col-md-12">
-        <div class="col-md-4 post-image-container">
-            @*<img src="~/Images/@item.Farmer.ImagePath" class="img post-front-image " />*@
+        <div class="col-xs-4 post-image-container">
+            <img src="~/Images/@item.PostImages.First().Image" class="img post-front-image " style="max-width:100%" />
         </div>
-        <div class="post col-md-8">
-            @*<h3><img src="~/Images/@item.Farmer.ImagePath" class="img img-thumbnail img-small" /> @item.Farmer.FullName.ToString() - <b>@item.Title</b> </h3>*@
+        <div class="post col-xs-8">
+            <h3><img src="~/Images/@item.User.ImagePath" class="img img-thumbnail img-small" /> @item.User.FullName.ToString() - <b>@item.Title</b> </h3>
             <p>@item.Description</p>
             <p><a class="btn btn-default" data-toggle="modal" data-target="#modalPost_@item.CropPostId" href="">More details &raquo;</a></p>
         </div>
@@ -27,7 +22,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    @*<h5 class="modal-title" id="exampleModalLongTitle"><img src="~/Images/@item.Farmer.ImagePath" class="img img-thumbnail img-small" /> @item.Farmer.FullName.ToString() - <b>@item.Title</h5>*@
+                    <h5 class="modal-title" id="exampleModalLongTitle"><img src="~/Images/@item.User.ImagePath" class="img img-thumbnail img-small" /> @item.User.FullName.ToString() - <b>@item.Title</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -35,13 +30,20 @@
                 <div class="modal-body">
                     @foreach (var detail in item.CropPostDetails) {
                         <div class="col-md-12">
-
+                            @detail.Crop.Name - @detail.Details [Php @detail.Price]
                         </div>
                     }
+                    @foreach (var img in item.PostImages)
+                    {
+                        <div class="col-xs-12">
+                            <img src="~/Images/@img.Image" class="img img-thumbnail" style="width:100%" alt="@img.ImageName" />
+                        </div>
+                    }
+                   
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-envelope"></span> Message Post Owner</button>
                 </div>
             </div>
         </div>

@@ -29,6 +29,6 @@ namespace VendeeCrop.Models
 
         public virtual ICollection<CropPostDetailModel> CropPostDetails { get; set; }
 
-        public virtual ICollection<PostImageModel> PostImages { get; set; }
+        public virtual ICollection<CropPostImageModel> PostImages { get; set; }
     }
 }
