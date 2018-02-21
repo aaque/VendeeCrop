@@ -43,5 +43,7 @@ namespace VendeeCrop.Models
         public System.Data.Entity.DbSet<VendeeCrop.Models.CropPostDetailModel> CropPostDetailModels { get; set; }
 
         public System.Data.Entity.DbSet<VendeeCrop.Models.UserModel> UserModels { get; set; }
+
+        public System.Data.Entity.DbSet<VendeeCrop.Models.CropPostImageModel> CropPostImageModels { get; set; }
     }
 }

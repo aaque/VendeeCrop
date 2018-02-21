@@ -9,7 +9,7 @@
 <h2><img src="~/Images/@Model.CropPost.User.ImagePath" class="img img-thumbnail img-small" />@Model.CropPost.Title - @Model.CropPost.Description</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", new { id = Model.CropPostId })
+    @Html.ActionLink("Add New Detail", "Create", new { id = Model.CropPostId })
 </p>
 <table class="table">
     <tr>
@@ -25,41 +25,64 @@
         <th>
             Price
         </th>
-        <th>
+        @*<th>
             Status
         </th>
         <th>
             Created
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
-@foreach (var item in ((VendeeCrop.Models.PostDetailsViewModel)Model).CropPostDetails) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Crop.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CropPost.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Details)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CropPostDetailId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CropPostDetailId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CropPostDetailId })
-        </td>
-    </tr>
-}
+    @foreach (var item in ((VendeeCrop.Models.PostDetailsViewModel)Model).CropPostDetails)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Crop.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CropPost.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CropPostDetailId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CropPostDetailId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CropPostDetailId })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<h2>Images</h2>
+<p>
+    @Html.ActionLink("Add New Image", "Create", "CropPostImage", routeValues: new { id = Model.CropPostId }, htmlAttributes: new { id = "logoutLink" })
+    @*@Html.ActionLink("Add New Image", "Create","PostImage", new { id = Model.CropPostId })*@
+</p>
+<div class="row">
+    @foreach (var imgs in Model.PostImages)
+    {
+        <div class="col-xs-4" style="min-height:350px;">
+            <img class="img img-responsive img-thumbnail" alt="@imgs.ImageName" src="~/Images/@imgs.Image" style="width:100%;" />
+            <div class="col-md-12 text-center">
+                @Html.ActionLink("Edit", "Edit", "CropPostImage", routeValues: new { id = @imgs.ImageId }, htmlAttributes: new { id = "edit" }) |
+                @Html.ActionLink("Details", "Details", "CropPostImage", routeValues: new { id = @imgs.ImageId }, htmlAttributes: new { id = "detail" }) |
+                @Html.ActionLink("Delete", "Delete", "CropPostImage", routeValues: new { id = @imgs.ImageId }, htmlAttributes: new { id = "delete" })
+            </div>
+        </div>
+    }
+</div>
+
+
+

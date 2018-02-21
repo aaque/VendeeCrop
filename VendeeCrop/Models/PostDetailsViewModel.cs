@@ -12,5 +12,7 @@ namespace VendeeCrop.Models
         public virtual CropPostModel CropPost { get; set; }
 
         public virtual ICollection<CropPostDetailModel> CropPostDetails { get; set; }
+
+        public virtual ICollection<CropPostImageModel> PostImages { get; set; }
     }
 }
