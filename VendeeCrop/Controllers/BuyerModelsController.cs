@@ -18,9 +18,9 @@ namespace VendeeCrop.Controllers
         {
             if (Session["UserModel"] != null)
             {
-                return RedirectToAction("LoginIndex", "Home");
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("LoginIndex", "Home");
+            return View();
         }
 
         public ActionResult Logout()

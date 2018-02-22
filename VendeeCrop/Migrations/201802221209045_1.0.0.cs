@@ -12,13 +12,16 @@ namespace VendeeCrop.Migrations
                 c => new
                     {
                         MessageId = c.Int(nullable: false, identity: true),
-                        UserId = c.Int(nullable: false),
+                        FromUserId = c.Int(),
+                        ToUserID = c.Int(),
                         Message = c.String(),
                         Created = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.MessageId)
-                .ForeignKey("dbo.UserModels", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
+                .ForeignKey("dbo.UserModels", t => t.FromUserId)
+                .ForeignKey("dbo.UserModels", t => t.ToUserID)
+                .Index(t => t.FromUserId)
+                .Index(t => t.ToUserID);
             
             CreateTable(
                 "dbo.NotificationModels",
@@ -55,10 +58,12 @@ namespace VendeeCrop.Migrations
         {
             DropForeignKey("dbo.UserNotifications", "UserId", "dbo.UserModels");
             DropForeignKey("dbo.UserNotifications", "NotificationId", "dbo.NotificationModels");
-            DropForeignKey("dbo.MessageModels", "UserId", "dbo.UserModels");
+            DropForeignKey("dbo.MessageModels", "ToUserID", "dbo.UserModels");
+            DropForeignKey("dbo.MessageModels", "FromUserId", "dbo.UserModels");
             DropIndex("dbo.UserNotifications", new[] { "UserId" });
             DropIndex("dbo.UserNotifications", new[] { "NotificationId" });
-            DropIndex("dbo.MessageModels", new[] { "UserId" });
+            DropIndex("dbo.MessageModels", new[] { "ToUserID" });
+            DropIndex("dbo.MessageModels", new[] { "FromUserId" });
             DropTable("dbo.UserNotifications");
             DropTable("dbo.NotificationModels");
             DropTable("dbo.MessageModels");

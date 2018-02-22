@@ -42,8 +42,21 @@ namespace VendeeCrop.Controllers
                 return RedirectToAction("LoginIndex");
             }
             var UserModel = (UserModel)Session["UserModel"];
-            var MyMessages = db.MessageModels.Where(m => m.ToUserID == UserModel.Id).Include(u => u.ToUser).Include(e => e.FromUser);
+            var MyMessages = db.MessageModels.Where(m => m.ToUserID == UserModel.Id).Include(e => e.FromUser).GroupBy(mm => mm.FromUserId);
             return View(MyMessages.ToList());
+        }
+
+        public  ActionResult MessageNew(int id)
+        {
+            
+            NewMessageViewModel messageVM = new NewMessageViewModel();
+            
+            UserModel currentUser = (UserModel)Session["UserModel"];
+            messageVM.FromUserModel = currentUser;
+            messageVM.ToUserModel = db.UserModels.Find(id);
+            var msg = db.MessageModels.Where(mm => (mm.FromUserId == currentUser.Id && mm.ToUserID == id) || (mm.FromUserId == id && mm.ToUserID == currentUser.Id));
+            messageVM.Messages = msg.ToList();
+            return View(messageVM);
         }
 
         public ActionResult About()

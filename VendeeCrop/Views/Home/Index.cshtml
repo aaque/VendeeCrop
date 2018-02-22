@@ -2,10 +2,11 @@
 
 @{
     ViewBag.Title = "Home Page";
+    var currentUser = (VendeeCrop.Models.UserModel)Session["UserModel"];
 }
 <div class="container" style="background-color:#e5e5e5; padding:30px 0;">
 
-  
+
     @foreach (var item in Model)
     {
         <div class="row">
@@ -61,7 +62,17 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-envelope"></span> Message Post Owner</button>
+                            @*@Html.ActionLink("<span class='glyphicon glyphicon - envelope'></span> Message Post Owner", "MessageNew","Home", routeValues: new { id = @item.User.Id }, htmlAttributes: new { id = "messagenew" })*@
+                            @if (item.User.Id == currentUser.Id)
+                            {
+                                <a href='@Url.Action("Index","CropPostDetail", routeValues: new { id = @item.CropPostId })' class="btn btn-primary"><span class='glyphicon glyphicon - envelope'></span> Edit Post</a>
+                            }
+                            else
+                            {
+                                <a href='@Url.Action("MessageNew","Home", routeValues: new { id = @item.User.Id })' class="btn btn-primary"><span class='glyphicon glyphicon - envelope'></span> Message Post Owner</a>
+                            }
+                            
+                            @*<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-envelope"></span> Message Post Owner</button>*@
                         </div>
                     </div>
                 </div>

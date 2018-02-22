@@ -17,10 +17,10 @@ namespace VendeeCrop.Models
         [ForeignKey(nameof(FromUserId))]
         public virtual UserModel FromUser { get; set; }
 
-        public int? ToUserID { get; set; }
+        public int ToUserID { get; set; }
 
-        [ForeignKey(nameof(ToUserID))]
-        public virtual UserModel ToUser { get; set; }
+        //[ForeignKey(nameof(ToUserID))]
+        //public virtual UserModel ToUser { get; set; }
 
         public string Message { get; set; }
 

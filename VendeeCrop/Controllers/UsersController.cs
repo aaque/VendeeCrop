@@ -18,7 +18,7 @@ namespace VendeeCrop.Controllers
         {
             if (Session["UserModel"] != null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("LoginIndex", "Home");
             }
             return View();
         }
@@ -27,7 +27,7 @@ namespace VendeeCrop.Controllers
         {
             Session["UserModel"] = null;
             Session["ErrorLogin"] = "";
-            return RedirectToAction("Login");
+            return RedirectToAction("LoginIndex", "Home");
         }
 
         // GET: Users
@@ -94,13 +94,34 @@ namespace VendeeCrop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PhoneNumber,FirstName,LastName,Type,Password,ConfirmPassword,StoreName,Address,ImagePath,IsActive,IsApproved")] UserModel userModel)
+        public ActionResult Edit([Bind(Include = "Id,PhoneNumber,FirstName,LastName,Type,Password,ConfirmPassword,StoreName,Address,ImagePath,IsActive,IsApproved")] UserModel userModel, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                var old_User = db.UserModels.Find(userModel.Id);
+                if (file != null)
+                {
+                    string filename = Guid.NewGuid().ToString("N") + file.FileName;
+                    file.SaveAs(HttpContext.Server.MapPath("~/Images/")
+                                                          + filename);
+                    userModel.ImagePath = filename;
+                }
+                else
+                {
+                    userModel.ImagePath = old_User.ImagePath;
+                }
+
+                if (!Request.IsAuthenticated)
+                {
+                    userModel.IsActive = old_User.IsActive;
+                    userModel.IsApproved = old_User.IsApproved;
+                }
+
+                userModel.Type = old_User.Type;
+
                 db.Entry(userModel).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect(Request.UrlReferrer.ToString());
             }
             return View(userModel);
         }

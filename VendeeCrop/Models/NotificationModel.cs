@@ -18,7 +18,7 @@ namespace VendeeCrop.Models
 
         public string MessageType { get; set; }
 
-        public int Message { get; set; }
+        public string Message { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime Created { get; set; }

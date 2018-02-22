@@ -7,6 +7,11 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
 
 </head>
 <body>
@@ -69,40 +74,44 @@
         <footer>
             <p>&copy; @DateTime.Now.Year - Vendee Crop</p>
         </footer>
+        @*<input type="hidden" value="" />*@
     </div>
 
 
 
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
-    <script src="~/signalr/hubs"></script>
+    
     <script type="text/javascript">
-        
+        var notificationType = "";
+        var fromId = '@(((VendeeCrop.Models.UserModel)Session["UserModel"]).Id)';
+        var toId = "";
         $(function () {
             var chat = $.connection.communicationR;
+            
+            chat.client.addNewMessageToPage = function (type, from, to, message) {
+                console.log("Type: " + type + ",From: " + from + ",To: " + to + ", Message: " + message);
+                var unreadNotificationCount = parseInt($("#lblNotificationCount").html());
+                var unreadMessageCount = parseInt($("#lblMessageCount").html());
+                if (type == "Message") {
+                    //message notification
+                }
 
-            chat.client.addNewMessageToPage = function (name, message) {
-                console.log("From: " + name + ", Message: " + message);
-                var notificationCount = parseInt($("#lblNotificationCount").html());
                 notificationCount += 1;
                 if (notificationCount > 0) {
                     $("#lblNotificationCount").removeClass("hidden");
                 }
-                $("#lblNotificationCount").html(notificationCount);
+                $("#lblNotificationCount").html(unreadNotificationCount);
             }
 
 
             $.connection.hub.start().done(function () {
                 $('#sendmessage').click(function () {
-                    chat.server.send("Bills", "fuck you");
+                    chat.server.send(notificationType, fromId, toId, $("#myMessage").val());
                 });
             })
         });
 
-        
+
 
     </script>
 </body>

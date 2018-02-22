@@ -26,7 +26,7 @@ else
         <li><a id="amessages" href="@Url.Action("Messages","Home")"><i id="lblmessage" class="glyphicon glyphicon-envelope"></i><span id="lblMessageCount" class="hidden">0</span></a></li>
         <li><a id="anotification" href="#"><i id="lblnotification" class="glyphicon glyphicon-bell"></i><span id="lblNotificationCount" class="hidden">0</span></a></li>
         <li>@Html.ActionLink("Hello " + Name, "Edit", "Users", routeValues: new { Id = _Id }, htmlAttributes: new { id = "logoutLink" })</li>
-        <li>@Html.ActionLink("Logout", "Logout", "BuyerModels", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
+        <li>@Html.ActionLink("Logout", "Logout", "Users", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
 //}
         @*else if (Session["FarmerModel"] != null)
     {
