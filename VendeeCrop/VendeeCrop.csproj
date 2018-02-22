@@ -48,6 +48,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -204,57 +210,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802131248289_InitialCreate.cs" />
-    <Compile Include="Migrations\201802131248289_InitialCreate.Designer.cs">
-      <DependentUpon>201802131248289_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201802220830400_1.0.0.cs" />
+    <Compile Include="Migrations\201802220830400_1.0.0.Designer.cs">
+      <DependentUpon>201802220830400_1.0.0.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802200204123_1.cs" />
-    <Compile Include="Migrations\201802200204123_1.Designer.cs">
-      <DependentUpon>201802200204123_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802200500267_2.cs" />
-    <Compile Include="Migrations\201802200500267_2.Designer.cs">
-      <DependentUpon>201802200500267_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802200728128_updatemore.cs" />
-    <Compile Include="Migrations\201802200728128_updatemore.Designer.cs">
-      <DependentUpon>201802200728128_updatemore.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802201215105_3.cs" />
-    <Compile Include="Migrations\201802201215105_3.Designer.cs">
-      <DependentUpon>201802201215105_3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802201225563_4.cs" />
-    <Compile Include="Migrations\201802201225563_4.Designer.cs">
-      <DependentUpon>201802201225563_4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802201544422_5.cs" />
-    <Compile Include="Migrations\201802201544422_5.Designer.cs">
-      <DependentUpon>201802201544422_5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802201605114_6.cs" />
-    <Compile Include="Migrations\201802201605114_6.Designer.cs">
-      <DependentUpon>201802201605114_6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802211400209_7.cs" />
-    <Compile Include="Migrations\201802211400209_7.Designer.cs">
-      <DependentUpon>201802211400209_7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802211447144_7.1.cs" />
-    <Compile Include="Migrations\201802211447144_7.1.Designer.cs">
-      <DependentUpon>201802211447144_7.1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802211501403_7.2.cs" />
-    <Compile Include="Migrations\201802211501403_7.2.Designer.cs">
-      <DependentUpon>201802211501403_7.2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802211518389_7.3.cs" />
-    <Compile Include="Migrations\201802211518389_7.3.Designer.cs">
-      <DependentUpon>201802211518389_7.3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802211521299_7.3.1.cs" />
-    <Compile Include="Migrations\201802211521299_7.3.1.Designer.cs">
-      <DependentUpon>201802211521299_7.3.1.cs</DependentUpon>
+    <Compile Include="Migrations\201802220848520_1.0.1.cs" />
+    <Compile Include="Migrations\201802220848520_1.0.1.Designer.cs">
+      <DependentUpon>201802220848520_1.0.1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -268,9 +230,13 @@
     <Compile Include="Models\FarmerModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MessageModel.cs" />
+    <Compile Include="Models\NotificationModel.cs" />
     <Compile Include="Models\PostDetailsViewModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignalR\CommunicationR.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -298,6 +264,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -383,6 +351,7 @@
     <Content Include="Views\CropPostImage\Details.cshtml" />
     <Content Include="Views\CropPostImage\Edit.cshtml" />
     <Content Include="Views\CropPostImage\Index.cshtml" />
+    <Content Include="Views\Home\Messages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -401,44 +370,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802131248289_InitialCreate.resx">
-      <DependentUpon>201802131248289_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802220830400_1.0.0.resx">
+      <DependentUpon>201802220830400_1.0.0.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802200204123_1.resx">
-      <DependentUpon>201802200204123_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802200500267_2.resx">
-      <DependentUpon>201802200500267_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802200728128_updatemore.resx">
-      <DependentUpon>201802200728128_updatemore.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802201215105_3.resx">
-      <DependentUpon>201802201215105_3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802201225563_4.resx">
-      <DependentUpon>201802201225563_4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802201544422_5.resx">
-      <DependentUpon>201802201544422_5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802201605114_6.resx">
-      <DependentUpon>201802201605114_6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802211400209_7.resx">
-      <DependentUpon>201802211400209_7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802211447144_7.1.resx">
-      <DependentUpon>201802211447144_7.1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802211501403_7.2.resx">
-      <DependentUpon>201802211501403_7.2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802211518389_7.3.resx">
-      <DependentUpon>201802211518389_7.3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802211521299_7.3.1.resx">
-      <DependentUpon>201802211521299_7.3.1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802220848520_1.0.1.resx">
+      <DependentUpon>201802220848520_1.0.1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,19 +1,22 @@
-﻿@media screen and (max-width:500px) {
-   
+﻿@media screen and (max-width:767px) {
+
 
     .login-buyer, .login-farmer {
         height: 52.5vh;
     }
 
-    
 
-    .login-farmer span, .login-buyer span {
-        font-size: 3.5em;
-    }
+
+        .login-farmer span, .login-buyer span {
+            font-size: 3.5em;
+        }
 
     .login-container {
         border: 0;
         background-color: #32ff7e;
     }
 
+    #lblnotification {
+        display: none;
+    }
 }

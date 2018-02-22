@@ -3,6 +3,10 @@
     font-family: 'Raleway', sans-serif;
 }
 
+/*.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    background-color: #1abc9c;
+}*/
+
 .site-title{
     font-size:3em;
     margin-bottom:30px;
@@ -105,3 +109,18 @@
 .post-image-container{
     text-align:center;
 }
+
+#lblnotification, #lblmessage {
+    font-size: 1.2em;
+}
+
+#lblNotificationCount, #lblMessageCount {
+    color: black;
+    background-color: #2ecc71;
+    border-radius: 50%;
+    padding: 0 5px;
+    transform: translate(-10px,-12px);
+    display: inline-block;
+    opacity: .9;
+}
+

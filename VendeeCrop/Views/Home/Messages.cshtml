@@ -1,0 +1,51 @@
+﻿@model IEnumerable<VendeeCrop.Models.MessageModel>
+
+@{
+    ViewBag.Title = "Messages";
+}
+
+<h2>Messages</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FromUser.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToUser.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromUser.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToUser.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MessageId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MessageId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MessageId })
+        </td>
+    </tr>
+}
+
+</table>

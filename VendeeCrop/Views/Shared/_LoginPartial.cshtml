@@ -3,39 +3,43 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        @if (Session["UserModel"] != null)
-        {
+        <ul class="nav navbar-nav navbar-right">
+            @if (Session["UserModel"] != null)
+    {
 
-            //if (Session["BuyerModel"] != null)
-            //{
-            var Name = ((VendeeCrop.Models.UserModel)Session["UserModel"]).FullName;
-            var _Id = ((VendeeCrop.Models.UserModel)Session["UserModel"]).Id;
-                <li>@Html.ActionLink("Hello " + Name , "Edit", "Users", routeValues: new { Id = _Id}, htmlAttributes: new { id = "logoutLink" })</li>
-                <li>@Html.ActionLink("Logout", "Logout", "BuyerModels", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
-            //}
-            @*else if (Session["FarmerModel"] != null)
-            {
-                var Name = ((VendeeCrop.Models.FarmerModel)Session["FarmerModel"]).FirstName;
-                var _Id = ((VendeeCrop.Models.FarmerModel)Session["FarmerModel"]).Id;
-                <li>@Html.ActionLink("Hello " + Name, "Edit", "FarmerModels", routeValues: new { Id = _Id }, htmlAttributes: new { id = "logoutLink" })</li>
-                <li>@Html.ActionLink("Logout", "Logout", "FarmerModels", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
-            }*@
-        }
-
-    @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
-    </ul>
+        //if (Session["BuyerModel"] != null)
+        //{
+        var Name = ((VendeeCrop.Models.UserModel)Session["UserModel"]).FullName;
+        var _Id = ((VendeeCrop.Models.UserModel)Session["UserModel"]).Id;
+        <li><a id="amessages" href="@Url.Action("Messages","Home")"><i id="lblmessage" class="glyphicon glyphicon-envelope"></i><span id="lblMessageCount" class="hidden">0</span></a></li>
+        <li><a id="anotification" href="#"><i id="lblnotification" class="glyphicon glyphicon-bell"></i><span id="lblNotificationCount" class="hidden">0</span></a></li>
+        <li>@Html.ActionLink("Hello " + Name, "Edit", "Users", routeValues: new { Id = _Id }, htmlAttributes: new { id = "logoutLink" })</li>
+        <li>@Html.ActionLink("Logout", "Logout", "BuyerModels", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
+//}
+        @*else if (Session["FarmerModel"] != null)
+    {
+        var Name = ((VendeeCrop.Models.FarmerModel)Session["FarmerModel"]).FirstName;
+        var _Id = ((VendeeCrop.Models.FarmerModel)Session["FarmerModel"]).Id;
+        <li>@Html.ActionLink("Hello " + Name, "Edit", "FarmerModels", routeValues: new { Id = _Id }, htmlAttributes: new { id = "logoutLink" })</li>
+        <li>@Html.ActionLink("Logout", "Logout", "FarmerModels", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
+    }*@
 }
+
+        @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+        </ul>
+}
+
+

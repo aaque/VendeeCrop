@@ -39,15 +39,23 @@
                         }
                     }
                     @*<li>@Html.ActionLink("About", "About", "Home")</li>
-            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                     @if (Request.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Crops", "Index", "Crop")</li>
-                        <li>@Html.ActionLink("Crop Types", "Index", "CropType")</li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Crops
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Crop List", "Index", "Crop")</li>
+                                <li>@Html.ActionLink("Crop Types", "Index", "CropType")</li>
+                            </ul>
+                        </li>
                         @*<li>@Html.ActionLink("Buyers", "Index", "BuyerModels")</li>*@
                         @*<li>@Html.ActionLink("Farmers", "Index", "FarmerModels")</li>*@
                         <li>@Html.ActionLink("Users", "Index", "Users")</li>
-                        <li>@Html.ActionLink("Farmers", "Index", "FarmerModels")</li>
+                        @*<li>@Html.ActionLink("Farmers", "Index", "FarmerModels")</li>*@
                     }
 
                 </ul>
@@ -63,8 +71,39 @@
         </footer>
     </div>
 
+
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+        
+        $(function () {
+            var chat = $.connection.communicationR;
+
+            chat.client.addNewMessageToPage = function (name, message) {
+                console.log("From: " + name + ", Message: " + message);
+                var notificationCount = parseInt($("#lblNotificationCount").html());
+                notificationCount += 1;
+                if (notificationCount > 0) {
+                    $("#lblNotificationCount").removeClass("hidden");
+                }
+                $("#lblNotificationCount").html(notificationCount);
+            }
+
+
+            $.connection.hub.start().done(function () {
+                $('#sendmessage').click(function () {
+                    chat.server.send("Bills", "fuck you");
+                });
+            })
+        });
+
+        
+
+    </script>
 </body>
 </html>

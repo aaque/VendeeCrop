@@ -35,6 +35,17 @@ namespace VendeeCrop.Controllers
             return View(cropPostModels.ToList());
         }
 
+        public ActionResult Messages()
+        {
+            if (Session["UserModel"] == null && !Request.IsAuthenticated)
+            {
+                return RedirectToAction("LoginIndex");
+            }
+            var UserModel = (UserModel)Session["UserModel"];
+            var MyMessages = db.MessageModels.Where(m => m.ToUserID == UserModel.Id).Include(u => u.ToUser).Include(e => e.FromUser);
+            return View(MyMessages.ToList());
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

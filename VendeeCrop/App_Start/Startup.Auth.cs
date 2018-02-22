@@ -5,8 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
+using Microsoft.Owin;
 using VendeeCrop.Models;
-
+[assembly: OwinStartup(typeof(VendeeCrop.Startup))]
 namespace VendeeCrop
 {
     public partial class Startup
@@ -45,6 +46,7 @@ namespace VendeeCrop
             // This is similar to the RememberMe option when you log in.
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
+            app.MapSignalR();
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",
