@@ -31,7 +31,7 @@ namespace VendeeCrop.Controllers
             {
                 return RedirectToAction("LoginIndex");
             }
-            var cropPostModels = db.CropPostModels.Include(c => c.User);
+            var cropPostModels = db.CropPostModels.Include(c => c.User).OrderByDescending(p=>p.Created);
             return View(cropPostModels.ToList());
         }
 
@@ -56,18 +56,123 @@ namespace VendeeCrop.Controllers
                 .Select(s => s.OrderByDescending(c => c.Created)
                 .FirstOrDefault());
 
-            ICollection<MessageModel> mm = new List<MessageModel>();
-                
-            foreach(var itm in MyMessages)
-            {
-               mm.Add(itm);
-            }
+            ICollection<MessagesViewModel> mm = new List<MessagesViewModel>();
+
+            
             foreach (var itm in FromMeMessages)
             {
-                mm.Add(itm);
+                bool hasValue = false;
+                bool hasChanges = false;
+                int repeatingId = 0;
+
+                foreach (var eee in mm)
+                {
+                    if (eee.FromUserId == itm.ToUserID)
+                    {
+                        hasValue = true;
+                        repeatingId = (int)itm.ToUserID;
+                        if(eee.MessageDateTime != itm.Created)
+                        {
+                            hasChanges = true;
+                        }
+                    }
+                }
+                if(hasValue)
+                {
+                    foreach (var occ in mm)
+                    {
+                        
+                        if (!hasValue)
+                        {
+                            UserModel uu = db.UserModels.Find((int)itm.ToUserID);
+                            MessagesViewModel mvm = new MessagesViewModel();
+                            mvm.FromUserId = (int)itm.ToUserID;
+                            mvm.MessageDateTime = itm.Created;
+                            mvm.LatestMessage = itm.Message;
+                            mvm.FromUser = uu;
+                            mm.Add(mvm);
+                        }
+                        else
+                        {
+                            if(hasChanges)
+                            {
+                                occ.LatestMessage = itm.Message;
+                                occ.MessageDateTime = itm.Created;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    UserModel uu = db.UserModels.Find((int)itm.ToUserID);
+                    MessagesViewModel mvm = new MessagesViewModel();
+                    mvm.FromUserId = (int)itm.ToUserID;
+                    mvm.MessageDateTime = itm.Created;
+                    mvm.LatestMessage = itm.Message;
+                    mvm.FromUser = uu;
+                    mm.Add(mvm);
+                }
+                
             }
 
-            return View(mm.ToList());
+            foreach (var itm in MyMessages)
+            {
+                bool hasValue = false;
+                bool hasChanges = false;
+                int repeatingId = 0;
+
+                foreach (var eee in mm)
+                {
+                    if (eee.FromUserId == itm.FromUserId)
+                    {
+                        hasValue = true;
+                        repeatingId = (int)itm.FromUserId;
+                        if (eee.MessageDateTime != itm.Created)
+                        {
+                            hasChanges = true;
+                        }
+                    }
+                }
+                if (hasValue)
+                {
+                    foreach (var occ in mm)
+                    {
+
+                        if (!hasValue)
+                        {
+                            UserModel uu = db.UserModels.Find((int)itm.ToUserID);
+                            MessagesViewModel mvm = new MessagesViewModel();
+                            mvm.FromUserId = (int)itm.ToUserID;
+                            mvm.MessageDateTime = itm.Created;
+                            mvm.LatestMessage = itm.Message;
+                            mvm.FromUser = uu;
+                            mm.Add(mvm);
+                        }
+                        else
+                        {
+                            if (hasChanges)
+                            {
+                                occ.LatestMessage = itm.Message;
+                                occ.MessageDateTime = itm.Created;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    UserModel uu = db.UserModels.Find((int)itm.ToUserID);
+                    MessagesViewModel mvm = new MessagesViewModel();
+                    mvm.FromUserId = (int)itm.ToUserID;
+                    mvm.MessageDateTime = itm.Created;
+                    mvm.LatestMessage = itm.Message;
+                    mvm.FromUser = uu;
+                    mm.Add(mvm);
+                }
+
+            }
+            
+
+            return View(mm);
         }
 
         public  ActionResult MessageNew(int? id)

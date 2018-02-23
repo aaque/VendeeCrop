@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VendeeCrop.Models.MessageModel>
+﻿@model IEnumerable<VendeeCrop.Models.MessagesViewModel>
 
 @{
     ViewBag.Title = "Messages";
@@ -27,34 +27,17 @@
     </tr>*@ 
 <div class="container" style="display: flex; align-content: center; justify-content: center;">
     @foreach (var item in Model)
-    {
-        <div class="col-md-10">
-            <div class="col-md-3">
-                @if (item.FromUserId == currentUser.Id)
-                {
-                    var FromUser = db.UserModels.Find(item.ToUserID);
-                    <img src="~/Images/@FromUser.ImagePath" class="img img-thumbnail img-small" /><span>@FromUser.FullName</span>
-                }
-                else
-                {
-                    <img src="~/Images/@item.FromUser.ImagePath" class="img img-thumbnail img-small" /><span>@item.FromUser.FullName</span>
-                }
-            </div>
-            <div class="col-md-6">
-                <h3>@item.Message</h3>
-            </div>
-            <div class="col-md-3">
-                @if (item.FromUserId == currentUser.Id)
-                {
-                    @Html.ActionLink("View", "MessageNew", new { id = item.ToUserID })
-                }
-                else
-                {
-                    @Html.ActionLink("View", "MessageNew", new { id = item.FromUserId })
-                }
+        {
+            <div class="col-md-12">
+                <img src="~/Images/@item.FromUser.ImagePath" class="img img-thumbnail img-small" style="float:left;" /><span style="font-size:2em;float:left;">@item.FromUser.FullName</span>
 
+                @Html.ActionLink("View", "MessageNew", new { id = item.FromUser.Id }, new { @class = "btn btn-primary", @style = "float:right;font-size:2em;margin:10px;" })
+                <div style="float:right;text-align:right">
+                    <div style="font-size:2em;overflow:hidden;">@item.LatestMessage</div>
+                    <span>@item.MessageDateTime.ToShortDateString() @item.MessageDateTime.ToShortTimeString()</span>
+                </div>
             </div>
-        </div>
+        
     }
     </div>
 @foreach (var item in Model) {

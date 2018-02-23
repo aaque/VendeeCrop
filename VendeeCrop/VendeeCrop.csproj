@@ -214,6 +214,14 @@
     <Compile Include="Migrations\201802231153472_753pm.Designer.cs">
       <DependentUpon>201802231153472_753pm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802232023150_422am.cs" />
+    <Compile Include="Migrations\201802232023150_422am.Designer.cs">
+      <DependentUpon>201802232023150_422am.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802232144253_544am.cs" />
+    <Compile Include="Migrations\201802232144253_544am.Designer.cs">
+      <DependentUpon>201802232144253_544am.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BuyerModel.cs" />
@@ -227,6 +235,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MessageModel.cs" />
+    <Compile Include="Models\MessagesViewModel.cs" />
     <Compile Include="Models\NewMessageViewModel.cs" />
     <Compile Include="Models\NotificationModel.cs" />
     <Compile Include="Models\PostDetailsViewModel.cs" />
@@ -369,6 +378,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802231153472_753pm.resx">
       <DependentUpon>201802231153472_753pm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802232023150_422am.resx">
+      <DependentUpon>201802232023150_422am.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802232144253_544am.resx">
+      <DependentUpon>201802232144253_544am.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -30,5 +30,13 @@ namespace VendeeCrop.Models
         public virtual ICollection<CropPostDetailModel> CropPostDetails { get; set; }
 
         public virtual ICollection<CropPostImageModel> PostImages { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime Created { get; set; }
+
+        public CropPostModel()
+        {
+            Created = DateTime.Now;
+        }
     }
 }
