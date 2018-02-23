@@ -14,7 +14,7 @@
     <script src="~/signalr/hubs"></script>
 
 </head>
-<body>
+<body class="body-home">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -85,15 +85,18 @@
         var notificationType = "";
         var fromId = '@(Session["UserModel"] == null ? 0 : (((VendeeCrop.Models.UserModel)Session["UserModel"]).Id))';
         var toId = "";
+        var chat;
         $(function () {
-            var chat = $.connection.communicationR;
-            
+            chat = $.connection.communicationR;
             chat.client.addNewMessageToPage = function (type, from, to, message) {
                 console.log("Type: " + type + ",From: " + from + ",To: " + to + ", Message: " + message);
                 var unreadNotificationCount = parseInt($("#lblNotificationCount").html());
                 var unreadMessageCount = parseInt($("#lblMessageCount").html());
                 if (type == "Message") {
                     //message notification
+                    if ($("#divmessages")) {
+                        MessageReceived(from, to, message);
+                    }
                 }
 
                 unreadNotificationCount += 1;
@@ -108,6 +111,10 @@
                 $('#sendmessage').click(function () {
                     chat.server.send(notificationType, fromId, toId, $("#myMessage").val());
                 });
+
+                function sendrealtime() {
+                    chat.server.send(notificationType, fromId, toId, $("#myMessage").val());
+                }
             })
         });
 

@@ -70,16 +70,23 @@ namespace VendeeCrop.Controllers
             return View(mm.ToList());
         }
 
-        public  ActionResult MessageNew(int id)
+        public  ActionResult MessageNew(int? id)
         {
-            
+            if(id == null)
+            {
+                return RedirectToAction("LoginIndex");
+            }
+            if (Session["UserModel"] == null && !Request.IsAuthenticated)
+            {
+                return RedirectToAction("LoginIndex");
+            }
             NewMessageViewModel messageVM = new NewMessageViewModel();
             
             UserModel currentUser = (UserModel)Session["UserModel"];
             messageVM.FromUserModel = currentUser;
             messageVM.ToUserModel = db.UserModels.Find(id);
-            var msg = db.MessageModels.Where(mm => (mm.FromUserId == currentUser.Id && mm.ToUserID == id) || (mm.FromUserId == id && mm.ToUserID == currentUser.Id));
-            messageVM.Messages = msg.ToList();
+            var msg = db.MessageModels.Where(mm => (mm.FromUserId == currentUser.Id && mm.ToUserID == id) || (mm.FromUserId == id && mm.ToUserID == currentUser.Id)).Take(40);
+            messageVM.Messages = msg.OrderByDescending(d=>d.Created).ToList();
             return View(messageVM);
         }
 

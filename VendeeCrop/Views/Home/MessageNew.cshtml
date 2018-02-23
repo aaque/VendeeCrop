@@ -9,19 +9,21 @@
 <div class="container" style="background-color:#e5e5e5;height:80vh;">
     <div class="row" style="display: flex; align-content: center; justify-content: center;">
         <div class="col-xs-8" style="background-color:#b6ff00;padding-top:30px;padding-bottom:20px;height:80vh;padding-left:0;padding-right:0;">
-            <div class="col-xs-12">
+            <div id="divmessages" class="col-xs-12 style-15">
                 @foreach (var chat in Model.Messages)
                 {
                     if (chat.FromUserId == ((VendeeCrop.Models.UserModel)Session["UserModel"]).Id)
                     {
-                        <div class="col-xs-12" style="text-align:right;">
-                            <span>@chat.Message</span>@*<img src="~/Images/@chat.FromUser.ImagePath"/>*@
+                        //right
+                        <div class="col-xs-12 message" style="text-align:right;">
+                            <span>@chat.Message</span><img src="~/Images/@chat.FromUser.ImagePath"/>
                         </div>
                     }
                     else
                     {
-                        <div class="col-xs-12" style="text-align:left;">
-                            <span>@chat.Message</span>@*<img src="~/Images/@chat.FromUser.ImagePath"/>*@
+                        //left
+                        <div class="col-xs-12 message" style="text-align:left;">
+                            <img src="~/Images/@chat.FromUser.ImagePath"/><span>@chat.Message</span>
                         </div>
                     }
                 }
@@ -30,7 +32,7 @@
                 <div class="input-group">
                     <input id="myMessage" type="text" class="form-control" placeholder=". . ." style="width:100%;max-width: 100%;">
                     <span class="input-group-btn">
-                        <button id="sendmessage" class="btn btn-secondary">Send</button>
+                        <a onclick="SendMessage()" class="btn btn-success">Send</a>
                     </span>
                 </div>
             </div>
@@ -43,7 +45,7 @@
 @*<button id="sendmessage">Send</button>*@
 
 <script>
-    //(function () {
+    
 
 
 
@@ -51,13 +53,55 @@
 
         var keyCode = (event.keyCode ? event.keyCode : event.which);
         if (keyCode == 13) {
-            console.log("clicked");
-            toId = '@(Model.ToUserModel.Id)';
-            notificationType = 'Message';
-            $('#sendmessage').trigger('click');
-            $('#myMessage').val('');
+            SendMessage();
         }
     });
+
+    var scrolled = false;
+
+    function SendMessage() {
+        updateScroll();
+        //console.log("sent");
+        toId = '@(Model.ToUserModel.Id)';
+        notificationType = 'Message';
+        //$('#sendmessage').trigger('click');
+        chat.server.send(notificationType, fromId, toId, $("#myMessage").val());
+        $('#myMessage').val('');
+        scrolled = false;
+        updateScroll();
+
+    }
+
+    function MessageReceived(from, to, message) {
+        var messages = $("#divmessages");
+        if (from == '@(Model.ToUserModel.Id)' && to == '@(((VendeeCrop.Models.UserModel)Session["UserModel"]).Id)') {
+            //sa left
+
+            messages.append('<div class="col-xs-12 message" style="text-align:left;"><img src="/Images/@Model.FromUserModel.ImagePath"/><span>' + message + '</span></div>')
+
+            updateScroll();
+        }else if (to == '@(Model.ToUserModel.Id)' && from == '@(((VendeeCrop.Models.UserModel)Session["UserModel"]).Id)'){
+            //sa right
+            messages.append('<div class="col-xs-12 message" style="text-align:right;"><span>' + message + '</span><img src="/Images/@((((VendeeCrop.Models.UserModel)Session["UserModel"]).ImagePath))"/></div>')
+            updateScroll();
+        }
+    }
+
+    function updateScroll() {
+        if (!scrolled) {
+            var element = document.getElementById("divmessages");
+            element.scrollTop = element.scrollHeight;
+            console.log("fixScroll")
+        }
+    }
+
+    $("#divmessages").on('scroll', function () {
+        scrolled = true;
+    });
+
+    (function () {
+        updateScroll();
+    })();
     //});
 </script>
 
