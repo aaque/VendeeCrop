@@ -2,22 +2,20 @@
 
 @{
     ViewBag.Title = "Messages";
+    var currentUser = (VendeeCrop.Models.UserModel)Session["UserModel"];
+    VendeeCrop.Models.ApplicationDbContext db = new VendeeCrop.Models.ApplicationDbContext();
 }
 
 
 
-@*<h2>Messages</h2>
+<h2>My Messages</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+    @*@Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.FromUser.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ToUser.PhoneNumber)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Message)
@@ -26,15 +24,46 @@
             @Html.DisplayNameFor(model => model.Created)
         </th>
         <th></th>
-    </tr>
+    </tr>*@ 
+<div class="container" style="display: flex; align-content: center; justify-content: center;">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-10">
+            <div class="col-md-3">
+                @if (item.FromUserId == currentUser.Id)
+                {
+                    var FromUser = db.UserModels.Find(item.ToUserID);
+                    <img src="~/Images/@FromUser.ImagePath" class="img img-thumbnail img-small" /><span>@FromUser.FullName</span>
+                }
+                else
+                {
+                    <img src="~/Images/@item.FromUser.ImagePath" class="img img-thumbnail img-small" /><span>@item.FromUser.FullName</span>
+                }
+            </div>
+            <div class="col-md-6">
+                <h3>@item.Message</h3>
+            </div>
+            <div class="col-md-3">
+                @if (item.FromUserId == currentUser.Id)
+                {
+                    @Html.ActionLink("View", "MessageNew", new { id = item.ToUserID })
+                }
+                else
+                {
+                    @Html.ActionLink("View", "MessageNew", new { id = item.FromUserId })
+                }
 
+            </div>
+        </div>
+    }
+    </div>
 @foreach (var item in Model) {
-    <tr>
+
+
+
+    @*<tr>
         <td>
             @Html.DisplayFor(modelItem => item.FromUser.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ToUser.PhoneNumber)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Message)
@@ -47,7 +76,7 @@
             @Html.ActionLink("Details", "Details", new { id=item.MessageId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.MessageId })
         </td>
-    </tr>
+    </tr>*@
 }
 
-</table>*@
+@*</table>*@

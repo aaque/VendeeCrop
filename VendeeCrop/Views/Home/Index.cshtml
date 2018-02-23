@@ -63,15 +63,23 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             @*@Html.ActionLink("<span class='glyphicon glyphicon - envelope'></span> Message Post Owner", "MessageNew","Home", routeValues: new { id = @item.User.Id }, htmlAttributes: new { id = "messagenew" })*@
-                            @if (item.User.Id == currentUser.Id)
-                            {
-                                <a href='@Url.Action("Index","CropPostDetail", routeValues: new { id = @item.CropPostId })' class="btn btn-primary"><span class='glyphicon glyphicon - envelope'></span> Edit Post</a>
+                            @if (Request.IsAuthenticated)
+                             {
+                                <a href='@Url.Action("Index", "CropPostDetail", routeValues: new { id = @item.CropPostId })' class="btn btn-primary"><span class='glyphicon glyphicon - envelope'></span> Edit Post</a>
                             }
                             else
                             {
-                                <a href='@Url.Action("MessageNew","Home", routeValues: new { id = @item.User.Id })' class="btn btn-primary"><span class='glyphicon glyphicon - envelope'></span> Message Post Owner</a>
+                                if (item.User.Id == currentUser.Id)
+                                {
+                                    <a href='@Url.Action("Index", "CropPostDetail", routeValues: new { id = @item.CropPostId })' class="btn btn-primary"><span class='glyphicon glyphicon - envelope'></span> Edit Post</a>
+                                }
+                                else
+                                {
+                                    <a href='@Url.Action("MessageNew", "Home", routeValues: new { id = @item.User.Id })' class="btn btn-primary"><span class='glyphicon glyphicon - envelope'></span> Message Post Owner</a>
+                                }
                             }
-                            
+
+
                             @*<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-envelope"></span> Message Post Owner</button>*@
                         </div>
                     </div>
@@ -82,5 +90,5 @@
     }
 
 
-    <button id="sendmessage">Send</button>
+    @*<button id="sendmessage">Send</button>*@
 </div>

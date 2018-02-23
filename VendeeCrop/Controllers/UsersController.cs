@@ -118,9 +118,10 @@ namespace VendeeCrop.Controllers
                 }
 
                 userModel.Type = old_User.Type;
-
+                db.Entry(old_User).State = EntityState.Detached;
                 db.Entry(userModel).State = EntityState.Modified;
                 db.SaveChanges();
+                Session["UserModel"] = userModel;
                 return Redirect(Request.UrlReferrer.ToString());
             }
             return View(userModel);

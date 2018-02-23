@@ -42,8 +42,32 @@ namespace VendeeCrop.Controllers
                 return RedirectToAction("LoginIndex");
             }
             var UserModel = (UserModel)Session["UserModel"];
-            var MyMessages = db.MessageModels.Where(m => m.ToUserID == UserModel.Id).Include(e => e.FromUser).GroupBy(mm => mm.FromUserId);
-            return View(MyMessages.ToList());
+            var MyMessages = db.MessageModels
+                .Where(m => m.ToUserID == UserModel.Id)
+                .Include(e => e.FromUser)
+                .GroupBy(g => g.FromUserId)
+                .Select(s => s.OrderByDescending(c => c.Created)
+                .FirstOrDefault());
+
+            var FromMeMessages = db.MessageModels
+                .Where(m => m.FromUserId == UserModel.Id)
+                .Include(e => e.FromUser)
+                .GroupBy(g => g.FromUserId)
+                .Select(s => s.OrderByDescending(c => c.Created)
+                .FirstOrDefault());
+
+            ICollection<MessageModel> mm = new List<MessageModel>();
+                
+            foreach(var itm in MyMessages)
+            {
+               mm.Add(itm);
+            }
+            foreach (var itm in FromMeMessages)
+            {
+                mm.Add(itm);
+            }
+
+            return View(mm.ToList());
         }
 
         public  ActionResult MessageNew(int id)

@@ -83,7 +83,7 @@
     
     <script type="text/javascript">
         var notificationType = "";
-        var fromId = '@(((VendeeCrop.Models.UserModel)Session["UserModel"]).Id)';
+        var fromId = '@(Session["UserModel"] == null ? 0 : (((VendeeCrop.Models.UserModel)Session["UserModel"]).Id))';
         var toId = "";
         $(function () {
             var chat = $.connection.communicationR;
@@ -96,8 +96,8 @@
                     //message notification
                 }
 
-                notificationCount += 1;
-                if (notificationCount > 0) {
+                unreadNotificationCount += 1;
+                if (unreadNotificationCount > 0) {
                     $("#lblNotificationCount").removeClass("hidden");
                 }
                 $("#lblNotificationCount").html(unreadNotificationCount);

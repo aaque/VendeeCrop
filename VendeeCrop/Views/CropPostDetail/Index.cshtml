@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "Index";
-    var IsAdmin = ((VendeeCrop.Models.UserModel)Session["UserModel"]).Type == "Admin" || Request.IsAuthenticated;
+    //var IsAdmin = ((VendeeCrop.Models.UserModel)Session["UserModel"]).Type == "Admin" || Request.IsAuthenticated;
 }
 
 <h2><img src="~/Images/@Model.CropPost.User.ImagePath" class="img img-thumbnail img-small" />@Model.CropPost.Title - @Model.CropPost.Description</h2>
