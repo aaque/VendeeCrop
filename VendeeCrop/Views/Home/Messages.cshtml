@@ -28,16 +28,18 @@
 <div class="container" style="display: flex; align-content: center; justify-content: center;">
     @foreach (var item in Model)
         {
-            <div class="col-md-12">
-                <img src="~/Images/@item.FromUser.ImagePath" class="img img-thumbnail img-small" style="float:left;" /><span style="font-size:2em;float:left;">@item.FromUser.FullName</span>
+            if(currentUser.Id != item.FromUser.Id)
+            {
+                <div class="col-md-12" style="background: white;border-radius: 1%">
+                    <img src="~/Images/@item.FromUser.ImagePath" class="img img-thumbnail img-small" style="float:left;" /><span style="font-size:2em;float:left;">@item.FromUser.FullName</span>
 
-                @Html.ActionLink("View", "MessageNew", new { id = item.FromUser.Id }, new { @class = "btn btn-primary", @style = "float:right;font-size:2em;margin:10px;" })
-                <div style="float:right;text-align:right">
-                    <div style="font-size:2em;overflow:hidden;">@item.LatestMessage</div>
-                    <span>@item.MessageDateTime.ToShortDateString() @item.MessageDateTime.ToShortTimeString()</span>
+                    @Html.ActionLink("View", "MessageNew", new { id = item.FromUser.Id }, new { @class = "btn btn-primary", @style = "float:right;font-size:2em;margin:10px;" })
+                    <div style="float:right;text-align:right">
+                        <div style="font-size:2em;overflow:hidden;">@item.LatestMessage</div>
+                        <span>@item.MessageDateTime.ToShortDateString() @item.MessageDateTime.ToShortTimeString()</span>
+                    </div>
                 </div>
-            </div>
-        
+            }
     }
     </div>
 @foreach (var item in Model) {

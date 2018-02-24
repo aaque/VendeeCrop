@@ -6,35 +6,42 @@
 
 @*<h2>MessageNew</h2>*@
 
+<style>
+    html {
+        overflow: hidden;
+    }
+</style>
+
 <div class="container" style="background-color:#e5e5e5;height:80vh;">
-    <div class="row" style="display: flex; align-content: center; justify-content: center;">
-        <div class="col-xs-8" style="background-color:#b6ff00;padding-top:30px;padding-bottom:20px;height:80vh;padding-left:0;padding-right:0;">
+    <div class="row" style="align-content: center; justify-content: center;">
+        <div class="col-xs-11 col-md-8" style="background-color:#ffffff;height:80vh;padding-left:0;padding-right:0;margin: 0 auto;left: 50%;transform: translate(-50%);">
             <div id="divmessages" class="col-xs-12 style-15">
                 @foreach (var chat in Model.Messages)
                 {
                     if (chat.FromUserId == ((VendeeCrop.Models.UserModel)Session["UserModel"]).Id)
                     {
                         //right
-                        <div class="col-xs-12 message" style="text-align:right;">
-                            <span>@chat.Message</span><img src="~/Images/@chat.FromUser.ImagePath"/>
+                        <div class="col-xs-12 message messagenew-right">
+                            <span style="display: inline;">@chat.Message</span><span><img style="display: inline;" src="~/Images/@chat.FromUser.ImagePath" /></span>
                         </div>
                     }
                     else
                     {
-                        //left
-                        <div class="col-xs-12 message" style="text-align:left;">
-                            <img src="~/Images/@chat.FromUser.ImagePath"/><span>@chat.Message</span>
-                        </div>
+                    //left
+                    <div class="col-xs-12 message messagenew-left">
+                        <span><img style="display: inline;" src="~/Images/@chat.FromUser.ImagePath" /></span><span style="display: inline;">@chat.Message</span>
+                    </div>
                     }
                 }
             </div>
-            <div class="col-xs-12" style="bottom:0;position:absolute;padding-right:0;padding-left:0;">
-                <div class="input-group">
-                    <input id="myMessage" type="text" class="form-control" placeholder=". . ." style="width:100%;max-width: 100%;">
-                    <span class="input-group-btn">
-                        <a onclick="SendMessage()" class="btn btn-success">Send</a>
-                    </span>
-                </div>
+
+        </div>
+        <div class="col-xs-11 col-md-8" style="bottom:0;padding-right:0;padding-left:0;margin: 0 auto;left: 50%;transform: translate(-50%);">
+            <div class="input-group">
+                <input id="myMessage" type="text" class="form-control" placeholder=". . ." style="width:100%;max-width: 100%;">
+                <span class="input-group-btn">
+                    <a onclick="SendMessage()" class="btn btn-success">Send</a>
+                </span>
             </div>
         </div>
 
@@ -45,9 +52,6 @@
 @*<button id="sendmessage">Send</button>*@
 
 <script>
-    
-
-
 
     jQuery('#myMessage').keypress(function (e) {
 
@@ -60,6 +64,7 @@
     var scrolled = false;
 
     function SendMessage() {
+        if ($('#myMessage').val().trim().length == 0) { return;}
         updateScroll();
         //console.log("sent");
         toId = '@(Model.ToUserModel.Id)';
@@ -76,23 +81,22 @@
         var messages = $("#divmessages");
         if (from == '@(Model.ToUserModel.Id)' && to == '@(((VendeeCrop.Models.UserModel)Session["UserModel"]).Id)') {
             //sa left
-
-            messages.append('<div class="col-xs-12 message" style="text-align:left;"><img src="/Images/@Model.FromUserModel.ImagePath"/><span>' + message + '</span></div>')
+            messages.append('<div class="col-xs-12 message messagenew-right"><span><img style="display: inline;" src="/Images/@Model.ToUserModel.ImagePath"/></span><span>' + message + '</span></div>')
 
             updateScroll();
         }else if (to == '@(Model.ToUserModel.Id)' && from == '@(((VendeeCrop.Models.UserModel)Session["UserModel"]).Id)'){
             //sa right
-            messages.append('<div class="col-xs-12 message" style="text-align:right;"><span>' + message + '</span><img src="/Images/@((((VendeeCrop.Models.UserModel)Session["UserModel"]).ImagePath))"/></div>')
+            messages.append('<div class="col-xs-12 message messagenew-right"><span>' + message + '</span><span><img style="display: inline;" src="/Images/@((((VendeeCrop.Models.UserModel)Session["UserModel"]).ImagePath))"/></span></div>')
             updateScroll();
         }
     }
 
     function updateScroll() {
-        if (!scrolled) {
+        //if (!scrolled) {
             var element = document.getElementById("divmessages");
             element.scrollTop = element.scrollHeight;
             console.log("fixScroll")
-        }
+        //}
     }
 
     $("#divmessages").on('scroll', function () {
