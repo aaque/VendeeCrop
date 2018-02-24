@@ -3,7 +3,7 @@ namespace VendeeCrop.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class _422am : DbMigration
+    public partial class _1224pm : DbMigration
     {
         public override void Up()
         {

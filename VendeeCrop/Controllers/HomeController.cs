@@ -59,7 +59,7 @@ namespace VendeeCrop.Controllers
             ICollection<MessagesViewModel> mm = new List<MessagesViewModel>();
 
             
-            foreach (var itm in FromMeMessages)
+            foreach (var itm in FromMeMessages) // from ako
             {
                 bool hasValue = false;
                 bool hasChanges = false;
@@ -115,7 +115,7 @@ namespace VendeeCrop.Controllers
                 
             }
 
-            foreach (var itm in MyMessages)
+            foreach (var itm in MyMessages) // to ako
             {
                 bool hasValue = false;
                 bool hasChanges = false;
@@ -140,9 +140,9 @@ namespace VendeeCrop.Controllers
 
                         if (!hasValue)
                         {
-                            UserModel uu = db.UserModels.Find((int)itm.ToUserID);
+                            UserModel uu = db.UserModels.Find((int)itm.FromUserId);
                             MessagesViewModel mvm = new MessagesViewModel();
-                            mvm.FromUserId = (int)itm.ToUserID;
+                            mvm.FromUserId = (int)itm.FromUserId;
                             mvm.MessageDateTime = itm.Created;
                             mvm.LatestMessage = itm.Message;
                             mvm.FromUser = uu;
@@ -160,9 +160,9 @@ namespace VendeeCrop.Controllers
                 }
                 else
                 {
-                    UserModel uu = db.UserModels.Find((int)itm.ToUserID);
+                    UserModel uu = db.UserModels.Find((int)itm.FromUserId);
                     MessagesViewModel mvm = new MessagesViewModel();
-                    mvm.FromUserId = (int)itm.ToUserID;
+                    mvm.FromUserId = (int)itm.FromUserId;
                     mvm.MessageDateTime = itm.Created;
                     mvm.LatestMessage = itm.Message;
                     mvm.FromUser = uu;
@@ -191,7 +191,7 @@ namespace VendeeCrop.Controllers
             messageVM.FromUserModel = currentUser;
             messageVM.ToUserModel = db.UserModels.Find(id);
             var msg = db.MessageModels.Where(mm => (mm.FromUserId == currentUser.Id && mm.ToUserID == id) || (mm.FromUserId == id && mm.ToUserID == currentUser.Id)).Take(40);
-            messageVM.Messages = msg.OrderByDescending(d=>d.Created).ToList();
+            messageVM.Messages = msg.OrderBy(d=>d.Created).ToList();
             return View(messageVM);
         }
 
