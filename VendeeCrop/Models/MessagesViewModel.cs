@@ -14,11 +14,13 @@ namespace VendeeCrop.Models
         public virtual UserModel FromUser { get; set; }
 
         public string LatestMessage { get; set; }
+        public bool IsUnread { get; set; }
         public DateTime MessageDateTime { get; set; }
 
         public MessagesViewModel()
         {
             FromUser = new UserModel();
+            IsUnread = false;
         }
     }
 }

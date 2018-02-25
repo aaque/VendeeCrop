@@ -44,6 +44,8 @@ namespace VendeeCrop.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             UserModel userModel = db.UserModels.Find(id);
+            ICollection<CropPostModel> posts = db.CropPostModels.Where(c => c.UserModelId == id).ToList();
+            userModel.CropPosts = posts;
             if (userModel == null)
             {
                 return HttpNotFound();

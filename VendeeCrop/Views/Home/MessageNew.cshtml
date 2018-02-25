@@ -14,38 +14,43 @@
 
 <div class="container" style="background-color:#e5e5e5;height:80vh;">
     <div class="row" style="align-content: center; justify-content: center;">
-        <div class="col-xs-11 col-md-8" style="background-color:#ffffff;height:80vh;padding-left:0;padding-right:0;margin: 0 auto;left: 50%;transform: translate(-50%);">
-            <div id="divmessages" class="col-xs-12 style-15">
-                @foreach (var chat in Model.Messages)
-                {
-                    if (chat.FromUserId == ((VendeeCrop.Models.UserModel)Session["UserModel"]).Id)
+        <div class="col-xs-11 col-md-8" style="height:40px; bottom:0;padding:10px 30px;color:#88FFA4;text-align:center;margin: 0 auto;left: 50%;transform: translate(-50%);background-color:#009432;">
+            <a class="message-link" href="@Url.Action("Messages","Home")"><i style="font-size:1.2em;float:left;" class="glyphicon glyphicon-circle-arrow-left"></i></a>
+            <span>@Model.ToUserModel.FullName</span>
+            @*<a class="message-link" href="#"><i style="font-size:1.2em;float:right;" class="glyphicon glyphicon-trash"></i></a>*@
+        </div>
+            <div class="col-xs-11 col-md-8" style="background-color:#ffffff;height:80vh;padding-left:0;padding-right:0;margin: 0 auto;left: 50%;transform: translate(-50%);">
+                <div id="divmessages" class="col-xs-12 style-15">
+                    @foreach (var chat in Model.Messages)
                     {
-                        //right
-                        <div class="col-xs-12 message messagenew-right">
-                            <span style="display: inline;">@chat.Message</span><span><img style="display: inline;" src="~/Images/@chat.FromUser.ImagePath" /></span>
-                        </div>
+                        if (chat.FromUserId == ((VendeeCrop.Models.UserModel)Session["UserModel"]).Id)
+                        {
+                            //right
+                            <div class="col-xs-12 message messagenew-right">
+                                <span style="display: inline;">@chat.Message</span><span><img style="display: inline;" src="~/Images/@chat.FromUser.ImagePath" /></span>
+                            </div>
+                        }
+                        else
+                        {
+                            //left
+                            <div class="col-xs-12 message messagenew-left">
+                                <span><a href="@Url.Action("Details","Users",routeValues: new {id = Model.ToUserModel.Id })"><img style="display: inline;" src="~/Images/@chat.FromUser.ImagePath" /></a></span><span style="display: inline;">@chat.Message</span>
+                            </div>
+                        }
                     }
-                    else
-                    {
-                    //left
-                    <div class="col-xs-12 message messagenew-left">
-                        <span><img style="display: inline;" src="~/Images/@chat.FromUser.ImagePath" /></span><span style="display: inline;">@chat.Message</span>
-                    </div>
-                    }
-                }
+                </div>
+
+            </div>
+            <div class="col-xs-11 col-md-8" style="bottom:0;padding-right:0;padding-left:0;margin: 0 auto;left: 50%;transform: translate(-50%);">
+                <div class="input-group">
+                    <input id="myMessage" type="text" class="form-control" placeholder=". . ." style="width:100%;max-width: 100%;">
+                    <span class="input-group-btn">
+                        <a onclick="SendMessage()" class="btn btn-success">Send</a>
+                    </span>
+                </div>
             </div>
 
         </div>
-        <div class="col-xs-11 col-md-8" style="bottom:0;padding-right:0;padding-left:0;margin: 0 auto;left: 50%;transform: translate(-50%);">
-            <div class="input-group">
-                <input id="myMessage" type="text" class="form-control" placeholder=". . ." style="width:100%;max-width: 100%;">
-                <span class="input-group-btn">
-                    <a onclick="SendMessage()" class="btn btn-success">Send</a>
-                </span>
-            </div>
-        </div>
-
-    </div>
 
 </div>
 
@@ -71,6 +76,23 @@
         notificationType = 'Message';
         //$('#sendmessage').trigger('click');
         chat.server.send(notificationType, fromId, toId, $("#myMessage").val());
+        //$.ajax({
+        //    url: "/Home/SaveRealTime",
+        //    cache: false,
+        //    type: "POST",
+        //    data: {
+        //        type: notificationType,
+        //        from: fromId,
+        //        to: toId,
+        //        value: $("#myMessage").val(),
+        //    },
+        //    success: function (msg) {
+        //        alert("text saved!");
+        //    },
+        //    error: function (request, status, error) {
+        //        alert("an error occurred: " + error);
+        //    }
+        //})
         $('#myMessage').val('');
         scrolled = false;
         updateScroll();
@@ -81,7 +103,7 @@
         var messages = $("#divmessages");
         if (from == '@(Model.ToUserModel.Id)' && to == '@(((VendeeCrop.Models.UserModel)Session["UserModel"]).Id)') {
             //sa left
-            messages.append('<div class="col-xs-12 message messagenew-right"><span><img style="display: inline;" src="/Images/@Model.ToUserModel.ImagePath"/></span><span>' + message + '</span></div>')
+            messages.append('<div class="col-xs-12 message messagenew-left"><span><a href="@Url.Action("Details","Users",routeValues: new {id = Model.ToUserModel.Id })"><img style="display: inline;" src="/Images/@Model.ToUserModel.ImagePath"/></a></span><span>' + message + '</span></div>')
 
             updateScroll();
         }else if (to == '@(Model.ToUserModel.Id)' && from == '@(((VendeeCrop.Models.UserModel)Session["UserModel"]).Id)'){
@@ -93,9 +115,10 @@
 
     function updateScroll() {
         //if (!scrolled) {
-            var element = document.getElementById("divmessages");
-            element.scrollTop = element.scrollHeight;
-            console.log("fixScroll")
+        IsOnMessages = true;
+        var element = document.getElementById("divmessages");
+        element.scrollTop = element.scrollHeight;
+        console.log("fixScroll")
         //}
     }
 
@@ -106,6 +129,8 @@
     (function () {
         updateScroll();
     })();
+
+    delete convo
     //});
 </script>
 

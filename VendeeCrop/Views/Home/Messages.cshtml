@@ -5,63 +5,82 @@
     var currentUser = (VendeeCrop.Models.UserModel)Session["UserModel"];
     VendeeCrop.Models.ApplicationDbContext db = new VendeeCrop.Models.ApplicationDbContext();
 }
-
-
-
-<h2>My Messages</h2>
-
-    @*@Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FromUser.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Message)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Created)
-        </th>
-        <th></th>
-    </tr>*@ 
-<div class="container" style="display: flex; align-content: center; justify-content: center;">
+@*@Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FromUser.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th></th>
+        </tr>*@
+<div class="container" style="align-content: center; justify-content: center;">
     @foreach (var item in Model)
+    {
+        if (currentUser.Id != item.FromUser.Id)
         {
-            if(currentUser.Id != item.FromUser.Id)
-            {
-                <div class="col-md-12" style="background: white;border-radius: 1%">
-                    <img src="~/Images/@item.FromUser.ImagePath" class="img img-thumbnail img-small" style="float:left;" /><span style="font-size:2em;float:left;">@item.FromUser.FullName</span>
+            <a href="@Url.Action("MessageNew","Home",routeValues: new {id = item.FromUser.Id })">
 
-                    @Html.ActionLink("View", "MessageNew", new { id = item.FromUser.Id }, new { @class = "btn btn-primary", @style = "float:right;font-size:2em;margin:10px;" })
-                    <div style="float:right;text-align:right">
-                        <div style="font-size:2em;overflow:hidden;">@item.LatestMessage</div>
-                        <span>@item.MessageDateTime.ToShortDateString() @item.MessageDateTime.ToShortTimeString()</span>
+                <div class="row" style="background: white;border-radius: 1%; margin: 5px 0; max-height:70px;">
+                    <div style="float:left;font-size:.5em;width:100%;padding:10px;">
+                        <div style="max-height:100vh;max-width:100px;float:left;padding-right:10px;">
+                            <img src="~/Images/@item.FromUser.ImagePath" class="img img-circle" style="float:left;max-height:100px;max-width:100px;width:50px;height:50px;" />
+                        </div>
+                        <div style=" max-height: 100%;">
+                            <span style="font-size:2em;float:left;">@item.FromUser.FullName -</span>
+                            <span style="font-size:2em;">@item.MessageDateTime.ToShortDateString() @item.MessageDateTime.ToShortTimeString()</span><br />
+                            <p class="messages-text">
+                                @if (item.IsUnread)
+                                {
+                                    <b>@item.LatestMessage</b>
+                                }
+                                else
+                                {
+                                    @item.LatestMessage
+                                }
+                            </p>
+
+                        </div>
+
                     </div>
+
+                    @*<div style="width:20%;float:right;text-align:right">
+                            @Html.ActionLink("View", "MessageNew", new { id = item.FromUser.Id }, new { @class = "btn btn-primary", @style = "float:right;font-size:2em;margin:10px;" })
+                        </div>*@
+
                 </div>
-            }
+            </a>
+
+        }
     }
-    </div>
-@foreach (var item in Model) {
+</div>
+@foreach (var item in Model)
+{
 
 
 
     @*<tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FromUser.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Message)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MessageId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MessageId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MessageId })
-        </td>
-    </tr>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.FromUser.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.MessageId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.MessageId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MessageId })
+            </td>
+        </tr>*@
 }
 
 @*</table>*@

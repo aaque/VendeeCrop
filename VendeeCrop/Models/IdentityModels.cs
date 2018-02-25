@@ -51,5 +51,7 @@ namespace VendeeCrop.Models
         public System.Data.Entity.DbSet<VendeeCrop.Models.NotificationModel> NotificationModels { get; set; }
 
         public System.Data.Entity.DbSet<VendeeCrop.Models.UserNotification> UserNotifications { get; set; }
+
+        public System.Data.Entity.DbSet<VendeeCrop.Models.UserMessages> UserMessages { get; set; }
     }
 }

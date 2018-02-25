@@ -4,103 +4,145 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="container">
+    <div class="row" style="padding-top:30px;display:flex; align-content: center; justify-content: center;">
+        <div class="col-xs-12 col-md-8" style="background-color:white;padding:20px;">
+            <div class="col-xs-12 col-md-3">
+                <img src="/Images/@Model.ImagePath" class="img img-thumbnail img-responsive" style="width:100%;height:100%;" />
 
-<div>
-    <h4>UserModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
+            </div>
+            <div class="detail-name" style="font-size:3em;width:100%">
+                @Model.FullName
+            </div>
+            <div class="col-md-12">Member Type: @Model.Type</div>
+            @if (Model.Type == "Buyer")
+            {
+            <div class="col-md-12">Store: @Model.StoreName</div>
+            <div class="col-md-12">Business Address: @Model.Address</div>
+            }
+            else if (Model.Type == "Farmer")
+            {
+            <div class="col-md-12">Address: @Model.Address</div>
+            }
 
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
+            @if (Model.IsApproved == true)
+            {
+            <div class="col-md-12">Membership Status: <span style="color:#4cff00">Member</span></div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+            }
+            else
+            {
+                if (Model.IsActive)
+                {
+            <div class="col-md-12">Membership Status: <span style="color:#ff6a00">Membership Declined</span></div>
+                }
+                else
+                {
+            <div class="col-md-12">Membership Status: <span style="color:#808080">Pending for Approval</span></div>
+                }
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
+            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
+    @foreach (var item in Model.CropPosts)
+    {
+        <div class="row" style="padding-top:30px;display:flex; align-content: center; justify-content: center;">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
+                <div class="post col-xs-12 col-md-8" style="background-color:white; padding-top:20px;">
+                    <div style="font-size:2em;">
+                        <img src="~/Images/@item.User.ImagePath" class="img img-thumbnail img-small" style="float:left;" />
+                        <div style="display:inline-block;margin-left:10px;">
+                            <p style="float:left;margin-bottom:0;">@item.User.FullName.ToString()</p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+                            <span style="font-size:10pt;display:block;">
+                                @item.Created.ToShortDateString() @item.Created.ToShortTimeString()
+                            </span>
+                        </div>
+                        <p style="float:right;">
+                            <a class="btn btn-default" data-toggle="modal" data-target="#modalPost_@item.CropPostId" href="">More details &raquo;</a>
+                        </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ConfirmPassword)
-        </dt>
+                    </div>
+                    <h2><b>@item.Title</b></h2>
+                    <p>@item.Description</p>
 
-        <dd>
-            @Html.DisplayFor(model => model.ConfirmPassword)
-        </dd>
+                    @if (@item.PostImages.Count() > 0)
+                    {
+                        <div class="col-xs-12 post-image-container">
+                            <img src="~/Images/@item.PostImages.FirstOrDefault().Image" class="img post-front-image " style="max-width:100%" />
+                        </div>
+                    }
+                </div>
+            <!-- Modal -->
+            <div class="modal fade" id="modalPost_@item.CropPostId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="exampleModalLongTitle">
+                                <img src="~/Images/@item.User.ImagePath" class="img img-thumbnail img-small" /> @item.User.FullName.ToString() - <b>@item.Title</b>
+                            </h2>
+                            <h4>
+                                @item.Description
+                            </h4>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StoreName)
-        </dt>
+                            @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>*@
+                        </div>
+                        <div class="modal-body">
+                            @if (item.CropPostDetails.Count() > 0)
+                            {
+                                foreach (var detail in item.CropPostDetails)
+                                {
+                                    <div class="col-md-12">
+                                        @detail.Crop.Name - @detail.Details [Php @detail.Price]
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="col-md-12">
+                                    <h2>Missing details</h2>
+                                </div>
+                            }
 
-        <dd>
-            @Html.DisplayFor(model => model.StoreName)
-        </dd>
+                            @foreach (var img in item.PostImages)
+                            {
+                                <div class="col-xs-12" style="padding-top:20px">
+                                    <img src="~/Images/@img.Image" class="img img-thumbnail" style="width:100%" alt="@img.ImageName" />
+                                </div>
+                            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            @*@Html.ActionLink("<span class='glyphicon glyphicon - envelope'></span> Message Post Owner", "MessageNew","Home", routeValues: new { id = @item.User.Id }, htmlAttributes: new { id = "messagenew" })*@
+                            @if (Request.IsAuthenticated)
+                            {
+                                <a href='@Url.Action("Index", "CropPostDetail", routeValues: new { id = @item.CropPostId })' class="btn btn-primary"><span class='glyphicon glyphicon - envelope'></span> Edit Post</a>
+                            }
+                            else
+                            {
+                                if (item.User.Id == Model.Id)
+                                {
+                                    <a href='@Url.Action("Index", "CropPostDetail", routeValues: new { id = @item.CropPostId })' class="btn btn-primary"><span class='glyphicon glyphicon - envelope'></span> Edit Post</a>
+                                }
+                                else
+                                {
+                                    <a href='@Url.Action("MessageNew", "Home", routeValues: new { id = @item.User.Id })' class="btn btn-primary"><span class='glyphicon glyphicon - envelope'></span> Message Post Owner</a>
+                                }
+                            }
 
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImagePath)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsApproved)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsApproved)
-        </dd>
-
-    </dl>
+                            @*<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-envelope"></span> Message Post Owner</button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

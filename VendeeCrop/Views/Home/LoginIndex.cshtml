@@ -9,24 +9,35 @@
     <title>Vendee Crop Login</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Raleway:500,700' rel='stylesheet' type='text/css'>
+    
     <link href="~/Content/vendee.css" rel="stylesheet" />
     <link href="~/Content/vendee-mobile.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width" />
 </head>
+
 <body class="login-body">
+    @*<a href="@Url.Action("Admin","Home")">
+        <span class="admin-icon"></span>
+    </a>*@
     <div class="row">
-        <a href="@Url.Action("Login","FarmerModels")">
-            <div class="login-farmer col-md-6">
-                <span>I<br /> am<br /> a<br /> Farmer</span>
-            </div>
-        </a>
-        <a href="@Url.Action("Login","BuyerModels")">
-            <div class="login-buyer col-md-6">
-                <span>I<br /> am<br /> a<br /> Buyer</span>
-            </div>
-        </a>
+        
+        <div class="login-farmer col-md-6">
+            
+            <a href="@Url.Action("Login","FarmerModels")">
+
+                <span></span>
+            </a>
+
+        </div>
+        <div class="login-buyer col-md-6">
+
+            <a href="@Url.Action("Login","BuyerModels")">
+
+                <span></span>
+            </a>
+        </div>
+
+
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
