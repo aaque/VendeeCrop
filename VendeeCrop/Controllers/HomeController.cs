@@ -190,7 +190,7 @@ namespace VendeeCrop.Controllers
             UserModel currentUser = (UserModel)Session["UserModel"];
             messageVM.FromUserModel = currentUser;
             messageVM.ToUserModel = db.UserModels.Find(id);
-            var msg = db.MessageModels.Where(mm => (mm.FromUserId == currentUser.Id && mm.ToUserID == id) || (mm.FromUserId == id && mm.ToUserID == currentUser.Id)).OrderByDescending(d => d.Created).Take(40);
+            var msg = db.MessageModels.Where(mm => (mm.FromUserId == currentUser.Id && mm.ToUserID == id) || (mm.FromUserId == id && mm.ToUserID == currentUser.Id)).Take(40);
             messageVM.Messages = msg.OrderBy(d=>d.Created).ToList();
             return View(messageVM);
         }
