@@ -36,6 +36,29 @@ namespace VendeeCrop.Controllers
             return View(db.UserModels.ToList());
         }
 
+        public ActionResult ForApproval()
+        {
+            return View(db.UserModels.Where(u => !u.IsApproved && !u.IsActive).ToList());
+        }
+
+        public ActionResult ApproveUser(int id)
+        {
+            UserModel um = db.UserModels.Find(id);
+            um.IsActive = true;
+            um.IsApproved = true;
+            db.SaveChanges();
+            return RedirectToAction("ForApproval");
+        }
+
+        public ActionResult DisapproveUser(int id)
+        {
+            UserModel um = db.UserModels.Find(id);
+            um.IsActive = true;
+            um.IsApproved = false;
+            db.SaveChanges();
+            return RedirectToAction("ForApproval");
+        }
+
         // GET: Users/Details/5
         public ActionResult Details(int? id)
         {

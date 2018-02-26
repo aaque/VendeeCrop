@@ -5,7 +5,30 @@
     var IsAdmin = ((VendeeCrop.Models.UserModel)Session["UserModel"]).Type == "Admin" || Request.IsAuthenticated;
 }
 
-<h2>My Posts</h2>
+
+<div class="container" style=" justify-content:center;align-content:center;">
+    @foreach (var item in Model)
+    {
+        <div class="row" style="padding-top:15px;display:flex; align-content: center; justify-content: center;">
+            <div class="col-xs-12 col-md-8" style="background-color:white;padding:5px;">
+                
+                <span style="font-size:2em;font-weight:bold;word-wrap:break-word">
+                    <span style="font-size:1em;float:right;top:0;padding-left:15px;">
+                        <a href="@Url.Action("Index","CropPostDetail",routeValues: new { id = item.CropPostId })"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="@Url.Action("Edit",routeValues: new { id = item.CropPostId })"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="@Url.Action("Delete",routeValues: new { id = item.CropPostId })"><i class="glyphicon glyphicon-trash"></i></a>
+                    </span>
+
+                    @item.Title
+                </span><span style="font-size:.7em;">(@item.Created)</span>
+
+            </div>
+        </div>
+        
+    }
+</div>
+
+@*<h2>My Posts</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -27,7 +50,7 @@
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.Type)
-        </th>*@
+        </th>
         <th></th>
     </tr>
 
@@ -48,10 +71,10 @@
             </td>
             @*<td>
                 @Html.DisplayFor(modelItem => item.Type)
-            </td>*@
+            </td>
             <td>
                 @Html.ActionLink("Post Details", "Index", "CropPostDetail", routeValues: new { Id = item.CropPostId }, htmlAttributes: new { id = "logoutLink" }) |
-                @*@Html.ActionLink("Post Details", "Index","CropPostDetail", new { id = item.CropPostId }) |*@
+                @Html.ActionLink("Post Details", "Index","CropPostDetail", new { id = item.CropPostId }) |
                 @Html.ActionLink("Edit", "Edit", new { id = item.CropPostId }) |
                 @Html.ActionLink("Details", "Details", new { id = item.CropPostId }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.CropPostId })
@@ -59,4 +82,4 @@
         </tr>
     }
 
-</table>
+</table>*@

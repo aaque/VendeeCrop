@@ -40,7 +40,7 @@
                     {
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
-                        if (((VendeeCrop.Models.UserModel)Session["UserModel"]).Type == "Farmer")
+                        if (((VendeeCrop.Models.UserModel)Session["UserModel"]).Type == "Farmer" || Request.IsAuthenticated)
                         {
                             <li>@Html.ActionLink("My Posts", "Index", "CropPost")</li>
                         }
@@ -61,7 +61,17 @@
                         </li>
                         @*<li>@Html.ActionLink("Buyers", "Index", "BuyerModels")</li>*@
                         @*<li>@Html.ActionLink("Farmers", "Index", "FarmerModels")</li>*@
-                        <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Users
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Pending For Approval", "ForApproval", "Users")</li>
+                                <li>@Html.ActionLink("All Users", "Index", "Users")</li>
+                            </ul>
+                        </li>
+                        
                         @*<li>@Html.ActionLink("Farmers", "Index", "FarmerModels")</li>*@
                     }
 

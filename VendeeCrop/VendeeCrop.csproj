@@ -277,6 +277,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\sweetalert2.all.js" />
     <Content Include="Scripts\vendee.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -357,6 +358,7 @@
     <Content Include="Views\CropPostImage\Index.cshtml" />
     <Content Include="Views\Home\Messages.cshtml" />
     <Content Include="Views\Home\MessageNew.cshtml" />
+    <Content Include="Views\Users\ForApproval.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

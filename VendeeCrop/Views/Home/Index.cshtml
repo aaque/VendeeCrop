@@ -25,7 +25,7 @@
                     </p>
 
                 </div>
-                <h2><b>@item.Title</b></h2>
+                <h2 style="word-wrap: break-word;"><b>@item.Title</b></h2>
                 <p>@item.Description</p>
 
                 @if (@item.PostImages.Count() > 0)
@@ -41,7 +41,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h2 class="modal-title" id="exampleModalLongTitle">
+                            <h2 class="modal-title" id="exampleModalLongTitle" style="word-wrap: break-word;">
                                 <a href="@Url.Action("Details","Users",routeValues: new {id = item.User.Id })"><img src="~/Images/@item.User.ImagePath" class="img img-thumbnail img-small" /> @item.User.FullName.ToString()</a> - <b>@item.Title</b>
                             </h2>
                             <h4>
