@@ -4,21 +4,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="mobile-web-app-capable" content="yes">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vendee Crop Login</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    
+
     <link href="~/Content/vendee.css" rel="stylesheet" />
     <link href="~/Content/vendee-mobile.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width" />
 </head>
 
 <body class="login-body">
-    @*<a href="@Url.Action("Admin","Home")">
+    <a href="@Url.Action("Admin","Home")">
         <span class="admin-icon"></span>
-    </a>*@
+    </a>
     <div class="row">
         
         <div class="login-farmer col-md-6">
@@ -41,5 +42,10 @@
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script>
+        (function () {
+            toggleFullScreen();
+        })();
+    </script>
 </body>
 </html>

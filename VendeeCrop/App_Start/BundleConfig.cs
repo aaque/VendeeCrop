@@ -22,7 +22,8 @@ namespace VendeeCrop
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
-                      "~/Scripts/jquery.signalR-2.1.2.min.js"));
+                      "~/Scripts/jquery.signalR-2.1.2.min.js",
+                      "~/Scripts/vendee.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
