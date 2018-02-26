@@ -17,7 +17,8 @@ namespace VendeeCrop.Controllers
         // GET: CropPost
         public ActionResult Index()
         {
-            var cropPostModels = db.CropPostModels.Include(c => c.User);
+            var UserModel = (UserModel)Session["UserModel"];
+            var cropPostModels = db.CropPostModels.Where(c=> c.UserModelId == UserModel.Id).Include(c => c.User);
             return View(cropPostModels.ToList());
         }
 
