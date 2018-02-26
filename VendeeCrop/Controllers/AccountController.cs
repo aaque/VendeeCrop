@@ -15,6 +15,7 @@ namespace VendeeCrop.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -79,6 +80,8 @@ namespace VendeeCrop.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    UserModel admin = db.UserModels.Where(s => s.PhoneNumber == model.Email).FirstOrDefault();
+                    Session["UserModel"] = admin;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -156,6 +159,23 @@ namespace VendeeCrop.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                    UserModel admin = new UserModel();
+                    admin.PhoneNumber = model.Email;
+                    admin.FirstName = model.Firstname;
+                    admin.LastName = model.Lastname;
+                    admin.Password = model.Password;
+                    admin.ConfirmPassword = model.ConfirmPassword;
+                    admin.IsActive = true;
+                    admin.IsApproved = true;
+                    admin.StoreName = "a";
+                    admin.Address = "a";
+                    admin.Type = "Administrator";
+                    db.UserModels.Add(admin);
+                    db.SaveChanges();
+
+                    Session["UserModel"] = admin;
+
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -257,6 +277,10 @@ namespace VendeeCrop.Controllers
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
+                UserModel admin = db.UserModels.Where(u => u.PhoneNumber == model.Email).FirstOrDefault();
+                admin.Password = model.Password;
+                admin.ConfirmPassword = model.ConfirmPassword;
+                db.SaveChanges();
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             AddErrors(result);
@@ -392,6 +416,7 @@ namespace VendeeCrop.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session["UserModel"] = null;
             return RedirectToAction("Index", "Home");
         }
 

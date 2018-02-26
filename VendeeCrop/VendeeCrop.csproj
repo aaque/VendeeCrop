@@ -210,9 +210,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802240425222_1224pm.cs" />
-    <Compile Include="Migrations\201802240425222_1224pm.Designer.cs">
-      <DependentUpon>201802240425222_1224pm.cs</DependentUpon>
+    <Compile Include="Migrations\201802250640328_111.cs" />
+    <Compile Include="Migrations\201802250640328_111.Designer.cs">
+      <DependentUpon>201802250640328_111.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802250658318_112.cs" />
+    <Compile Include="Migrations\201802250658318_112.Designer.cs">
+      <DependentUpon>201802250658318_112.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -231,6 +235,7 @@
     <Compile Include="Models\NewMessageViewModel.cs" />
     <Compile Include="Models\NotificationModel.cs" />
     <Compile Include="Models\PostDetailsViewModel.cs" />
+    <Compile Include="Models\UserMessages.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -247,7 +252,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\admin-logo.png" />
+    <Content Include="Images\bg.jpg" />
+    <Content Include="Images\buyer-logo.png" />
     <Content Include="Images\crop1.jpg" />
+    <Content Include="Images\farmeri-icon.png" />
+    <Content Include="Images\farmeri-icon2.png" />
     <Content Include="Images\meteorite-background-seamless-crystals.jpg" />
     <Content Include="Images\soybeanfield.jpg" />
     <Content Include="Images\vege1.jpg" />
@@ -368,8 +378,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802240425222_1224pm.resx">
-      <DependentUpon>201802240425222_1224pm.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802250640328_111.resx">
+      <DependentUpon>201802250640328_111.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802250658318_112.resx">
+      <DependentUpon>201802250658318_112.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

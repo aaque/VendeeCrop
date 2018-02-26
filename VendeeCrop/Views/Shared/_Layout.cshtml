@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1, user-scalable=no, minimal-ui">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -26,6 +26,8 @@
                 @if (Session["UserModel"] != null || Request.IsAuthenticated)
                 {
                     @Html.ActionLink("Vendee Crop", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    <a id="amessleft" class="navbar-brand" href="@Url.Action("Messages","Home")"><i id="lblmessage" class="glyphicon glyphicon-envelope"></i><span id="lblMessageCountLeft" class="hidden">0</span></a>
+                    <a id="anotileft" class="navbar-brand" href="#"><i id="lblnotification" class="glyphicon glyphicon-bell"></i><span id="lblNotificationCountLeft" class="hidden">0</span></a>
                 }
                 else
                 {
@@ -84,26 +86,64 @@
     <script type="text/javascript">
         var notificationType = "";
         var fromId = '@(Session["UserModel"] == null ? 0 : (((VendeeCrop.Models.UserModel)Session["UserModel"]).Id))';
+        var myUserId = '@(Session["UserModel"] == null ? 0 : (((VendeeCrop.Models.UserModel)Session["UserModel"]).Id))';
         var toId = "";
         var chat;
+        var IsOnMessages = false;
         $(function () {
             chat = $.connection.communicationR;
             chat.client.addNewMessageToPage = function (type, from, to, message) {
-                console.log("Type: " + type + ",From: " + from + ",To: " + to + ", Message: " + message);
-                var unreadNotificationCount = parseInt($("#lblNotificationCount").html());
-                var unreadMessageCount = parseInt($("#lblMessageCount").html());
+                //console.log("Type: " + type + ",From: " + from + ",To: " + to + ", Message: " + message);
+                
                 if (type == "Message") {
-                    //message notification
-                    if ($("#divmessages")) {
+                    var unreadMessageCount = parseInt($("#lblMessageCountLeft").html());
+                    if (!IsOnMessages) {
+                        unreadMessageCount = unreadMessageCount + 1;
+                        if (unreadMessageCount > 0) {
+                            $("#lblMessageCountLeft").removeClass("hidden");
+                            $("#lblMessageCountRight").removeClass("hidden");
+                        }
+                        $("#lblMessageCountLeft").html(unreadMessageCount);
+                        $("#lblMessageCountRight").html(unreadMessageCount);
+                        hasnotification = true;
+                    } else {
                         MessageReceived(from, to, message);
+                        //console.log(!(to != myUserId && from != myUserId))
+                        if ((to != myUserId && from != myUserId)) {
+                            unreadMessageCount += 1;
+                            if (unreadMessageCount > 0) {
+                                $("#lblMessageCountLeft").removeClass("hidden");
+                                $("#lblMessageCountRight").removeClass("hidden");
+                            }
+                            $("#lblMessageCountLeft").html(unreadMessageCount);
+                            $("#lblMessageCountRight").html(unreadMessageCount);
+                            hasnotification = true;
+                        }
                     }
+
+                } else if (type == "Notification") {
+
                 }
 
-                unreadNotificationCount += 1;
-                if (unreadNotificationCount > 0) {
-                    $("#lblNotificationCount").removeClass("hidden");
-                }
-                $("#lblNotificationCount").html(unreadNotificationCount);
+
+
+
+                //var unreadNotificationCount = parseInt($("#lblNotificationCountLeft").html());
+                
+                //if (type == "Message") {
+                //    //message notification
+                //    if ($("#divmessages")) {
+                //        MessageReceived(from, to, message);
+                //    }
+                //}
+
+                //unreadNotificationCount += 1;
+                //if (unreadNotificationCount > 0) {
+                //    $("#lblNotificationCountLeft").removeClass("hidden");
+                //    $("#lblNotificationCountRight").removeClass("hidden");
+                //}
+                //$("#lblNotificationCountLeft").html(unreadNotificationCount);
+                //$("#lblNotificationCountRight").html(unreadNotificationCount);
             }
 
 
@@ -116,6 +156,28 @@
                     chat.server.send(notificationType, fromId, toId, $("#myMessage").val());
                 }
             })
+
+            $.ajax({
+                url: "/Home/GetMessagesNotificationCount",
+                cache: false,
+                type: "GET",
+                success: function (count) {
+                    var unreadMessageCount = parseInt($("#lblMessageCountLeft").html());
+                    unreadMessageCount = count;
+                    if (unreadMessageCount > 0) {
+                        $("#lblMessageCountLeft").removeClass("hidden");
+                        $("#lblMessageCountRight").removeClass("hidden");
+                    }
+                    $("#lblMessageCountLeft").html(unreadMessageCount);
+                    $("#lblMessageCountRight").html(unreadMessageCount);
+                },
+                error: function (request, status, error) {
+                    //alert("an error occurred: " + error);
+                }
+            })
+
+
+
         });
 
 

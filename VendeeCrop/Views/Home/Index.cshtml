@@ -7,59 +7,59 @@
 <div class="container" style="padding:30px 0;">
     @foreach (var item in Model)
     {
-        <div class="row" style="background-color: white;padding: 10px 0;border-radius: 1%;margin-bottom: 20px;">
-            <div style="width:100%">
-                
-                <div class="post col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div style="font-size:2em;">
-                        <img src="~/Images/@item.User.ImagePath" class="img img-thumbnail img-small" style="float:left;"/>
-                        <div style="display:inline-block;margin-left:10px;">
-                            <p style="float:left;margin-bottom:0;">@item.User.FullName.ToString()</p>
-                            
-                            <span style="font-size:10pt;display:block;">
-                                @item.Created.ToShortDateString() @item.Created.ToShortTimeString()
-                            </span>
-                        </div>
-                        <p style="float:right;">
-                            <a class="btn btn-default" data-toggle="modal" data-target="#modalPost_@item.CropPostId" href="">More details &raquo;</a>
-                        </p>
+        <div class="row" style="display:flex; align-content: center; justify-content: center;">
+            @*<div style="width:100%">*@
 
+            <div class="post col-xs-12 col-sm-10 col-md-8 col-lg-8" style="background-color: white;padding: 20px;border-radius: 1%;margin-bottom: 20px;">
+                <div style="font-size:2em;">
+                    <a href="@Url.Action("Details","Users",routeValues: new {id = item.User.Id })"><img src="~/Images/@item.User.ImagePath" class="img img-thumbnail img-small" style="float:left;" /></a>
+                    <div style="display:inline-block;margin-left:10px;">
+                        <p style="float:left;margin-bottom:0;">@item.User.FullName.ToString()</p>
+
+                        <span style="font-size:10pt;display:block;">
+                            @item.Created.ToShortDateString() @item.Created.ToShortTimeString()
+                        </span>
                     </div>
-                    <h2><b>@item.Title</b></h2>
-                    <p>@item.Description</p>
-                    
-                    @if (@item.PostImages.Count() > 0)
-                    {
-                        <div class="col-xs-12 post-image-container">
-                            <img src="~/Images/@item.PostImages.FirstOrDefault().Image" class="img post-front-image " style="max-width:100%" />
-                        </div>
-                    }
+                    <p style="float:right;">
+                        <a class="btn btn-default" data-toggle="modal" data-target="#modalPost_@item.CropPostId" href="">More details &raquo;</a>
+                    </p>
+
                 </div>
+                <h2><b>@item.Title</b></h2>
+                <p>@item.Description</p>
+
+                @if (@item.PostImages.Count() > 0)
+                    {
+                    <div class="col-xs-12 post-image-container">
+                        <img src="~/Images/@item.PostImages.FirstOrDefault().Image" class="img post-front-image " style="max-width:100%" />
+                    </div>
+                    }
             </div>
+            @*</div>*@
             <!-- Modal -->
             <div class="modal fade" id="modalPost_@item.CropPostId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h2 class="modal-title" id="exampleModalLongTitle">
-                                <img src="~/Images/@item.User.ImagePath" class="img img-thumbnail img-small" /> @item.User.FullName.ToString() - <b>@item.Title</b>
+                                <a href="@Url.Action("Details","Users",routeValues: new {id = item.User.Id })"><img src="~/Images/@item.User.ImagePath" class="img img-thumbnail img-small" /> @item.User.FullName.ToString()</a> - <b>@item.Title</b>
                             </h2>
                             <h4>
                                 @item.Description
                             </h4>
 
                             @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>*@
+                                    <span aria-hidden="true">&times;</span>
+                                </button>*@
                         </div>
                         <div class="modal-body">
                             @if (item.CropPostDetails.Count() > 0)
                             {
                                 foreach (var detail in item.CropPostDetails)
                                 {
-                                    <div class="col-md-12">
-                                        @detail.Crop.Name - @detail.Details [Php @detail.Price]
-                                    </div>
+                                <div class="col-md-12">
+                                    @detail.Crop.Name - @detail.Details [Php @detail.Price]
+                                </div>
                                 }
                             }
                             else
@@ -88,11 +88,11 @@
                             {
                                 if (item.User.Id == currentUser.Id)
                                 {
-                                    <a href='@Url.Action("Index", "CropPostDetail", routeValues: new { id = @item.CropPostId })' class="btn btn-primary"><span class='glyphicon glyphicon - envelope'></span> Edit Post</a>
+                                <a href='@Url.Action("Index", "CropPostDetail", routeValues: new { id = @item.CropPostId })' class="btn btn-primary"><span class='glyphicon glyphicon - envelope'></span> Edit Post</a>
                                 }
                                 else
                                 {
-                                    <a href='@Url.Action("MessageNew", "Home", routeValues: new { id = @item.User.Id })' class="btn btn-primary"><span class='glyphicon glyphicon - envelope'></span> Message Post Owner</a>
+                                <a href='@Url.Action("MessageNew", "Home", routeValues: new { id = @item.User.Id })' class="btn btn-primary"><span class='glyphicon glyphicon - envelope'></span> Message Post Owner</a>
                                 }
                             }
 

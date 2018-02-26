@@ -35,6 +35,17 @@ namespace VendeeCrop.SignalR
 
             db.SaveChanges();
 
+
+            if (type == "Message")
+            {
+                UserMessages noti = new UserMessages();
+                noti.IsUnread = true;
+                noti.UserId = int.Parse(toId);
+                noti.MessageId = msgModel.MessageId;
+                db.UserMessages.Add(noti);
+                db.SaveChanges();
+            }
+
             Clients.All.addNewMessageToPage(type ,fromId, toId, message);
         }
     }
