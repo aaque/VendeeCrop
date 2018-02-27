@@ -230,6 +230,8 @@ D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.ApplicationInsights.dll
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.AspNet.Identity.Core.dll
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.Owin.dll
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.Owin.Host.SystemWeb.dll
@@ -251,6 +253,8 @@ D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\System.Web.WebPages.Deployment.dll
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\System.Web.WebPages.dll
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\System.Web.WebPages.Razor.dll
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\WebGrease.dll
+D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\System.Web.Helpers.xml
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\System.Web.Mvc.xml
@@ -280,13 +284,8 @@ D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.AI.DependencyCollector.xm
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.AI.ServerTelemetryChannel.xml
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.AI.WindowsServer.xml
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.AI.Web.xml
+D:\Biloy\Documents\VendeeCrop\VendeeCrop\obj\Debug\VendeeCrop.Migrations._11.resources
+D:\Biloy\Documents\VendeeCrop\VendeeCrop\obj\Debug\VendeeCrop.csproj.GenerateResource.Cache
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\obj\Debug\VendeeCrop.csproj.CoreCompileInputs.cache
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\obj\Debug\VendeeCrop.dll
 D:\Biloy\Documents\VendeeCrop\VendeeCrop\obj\Debug\VendeeCrop.pdb
-D:\Biloy\Documents\VendeeCrop\VendeeCrop\obj\Debug\VendeeCrop.csprojResolveAssemblyReference.cache
-D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.AspNet.SignalR.Core.dll
-D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
-D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.AspNet.SignalR.Core.xml
-D:\Biloy\Documents\VendeeCrop\VendeeCrop\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
-D:\Biloy\Documents\VendeeCrop\VendeeCrop\obj\Debug\VendeeCrop.Migrations._111.resources
-D:\Biloy\Documents\VendeeCrop\VendeeCrop\obj\Debug\VendeeCrop.csproj.GenerateResource.Cache

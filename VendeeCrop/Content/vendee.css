@@ -57,15 +57,7 @@
     display: inline-grid;
 }
 
-.login-buyer span{
-    background-image:url(../Images/buyer-logo.png);
-    background-position:center;
-    background-repeat:no-repeat;
-    width:270px!important;
-    height:270px!important;
-    min-width:270px;
-    min-height:270px;
-}
+
 
 .login-farmer {
     
@@ -86,14 +78,35 @@
     display: inline-grid;
 }
 
-.login-farmer span{
-    background-image:url(../Images/farmeri-icon2.png);
+#spanFarmer {
+    background-image: url(../Images/buyer-logo3.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 270px !important;
+    height: 270px !important;
+    min-width: 270px;
+    min-height: 270px;
+}
+
+#spanBuyer{
+    background-image:url(../Images/farmeri-icon3.png);
     background-position:center;
     background-repeat:no-repeat;
     width:270px!important;
     height:270px!important;
     min-width:270px;
     min-height:270px;
+}
+
+.admin-icon {
+    background-image: url('../Images/admin-logo.png');
+    background-position: center;
+    background-size: 100%;
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    top: 10px;
+    left: 20px;
 }
 
 .login-buyer span:hover, .login-farmer span:hover {
@@ -112,16 +125,7 @@
 
 }
 
-.admin-icon {
-    background-image:url('../Images/admin-logo.png');
-    background-position: center;
-    background-size: 100%;
-    position: absolute;
-    height: 50px;
-    width: 50px;
-    top:10px;
-    left:20px;
-}
+
 
 .message-link:hover{
     color:#88FFA4;
