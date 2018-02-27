@@ -68,7 +68,8 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Pending For Approval", "ForApproval", "Users")</li>
-                                <li>@Html.ActionLink("All Users", "Index", "Users")</li>
+                                <li><a href="@Url.Action("Index","Users",routeValues: new { id = "Buyer" })">All Buyers</a></li>
+                                <li><a href="@Url.Action("Index","Users",routeValues: new { id = "Farmer" })">All Farmers</a></li>
                             </ul>
                         </li>
                         

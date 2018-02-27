@@ -31,9 +31,12 @@ namespace VendeeCrop.Controllers
         }
 
         // GET: Users
-        public ActionResult Index()
+        public ActionResult Index(string type)
         {
-            return View(db.UserModels.ToList());
+            UserListViewModel ulvm = new UserListViewModel();
+            ulvm.UserList = db.UserModels.Where(u => u.Type == type).ToList();
+            ulvm.UserType = type;
+            return View(ulvm);
         }
 
         public ActionResult ForApproval()
